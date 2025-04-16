@@ -7,17 +7,22 @@
 //&display=swap - добавить при подключении через плагин
 // Подключить если есть локальные файлы шрифтов
 //@import "fonts/fonts";
-
+@import url(https://fonts.googleapis.com/css?family=Raleway:100,200,300,regular,500,600,700,800,900&display=swap);
+@import url(https://fonts.googleapis.com/css?family=Open+Sans:300,regular,500,600,700,800&display=swap);
 // Подключение иконочных шрифтов ==============================================================================================================================================================================================================================================================================
 // Подключить если есть файл иконочного шрифта
 //@import "fonts/icons";
 
 // Шрифт по умолчанию ==============================================================================================================================================================================================================================================================================
-$fontFamily: "";
+$fontFamily: "Open Sans";
 $fontSize: rem(14); // где 14(px) - размер шрифта по умолчанию из макета
 
 // Основные цвета
-$mainColor: #000; // Цвет шрифта по умолчанию
+$mainColor: #001011; // Цвет шрифта по умолчанию
+$black: #001011;
+$blue: #2176AE;
+$green: #558564;
+$purple: #9448BC;
 
 // НАСТРОЙКИ ===============================================================================================================================================================================================================================================================================================
 // Минимальная ширина страницы
@@ -25,7 +30,7 @@ $minWidth: 320;
 // Ширина полотна (макета)
 $maxWidth: 1920;
 // Ширина ограничивающего контейнера (0 = нет ограничения)
-$maxWidthContainer: 1170;
+$maxWidthContainer: 1600;
 // Общий отступ у контейнера
 // (30 = по 15px слева и справа, 0 = нет отступа)
 $containerPadding: 30;
@@ -64,7 +69,6 @@ body {
 	min-height: 100%;
 	display: flex;
 	flex-direction: column;
-	overflow: hidden;
 
 	// Прижимаем footer
 	>main {
@@ -94,6 +98,16 @@ body {
 			box-sizing: content-box;
 			margin: 0 auto;
 		}
+
+		@if ($containerPadding>0) {
+			padding: 0 rem(math.div($containerPadding, 2));
+		}
+	}
+
+	.container {
+		max-width: rem($maxWidthContainer);
+		box-sizing: content-box;
+		margin: 0 auto;
 
 		@if ($containerPadding>0) {
 			padding: 0 rem(math.div($containerPadding, 2));
@@ -167,6 +181,7 @@ body {
 // Сниппет (HTML): ibga (a c картинкой и классами)
 [class*="-ibg"] {
 	position: relative;
+
 	img {
 		position: absolute;
 		width: 100%;
@@ -176,6 +191,7 @@ body {
 		object-fit: cover;
 	}
 }
+
 [class*="-ibg_contain"] {
 	img {
 		object-fit: contain;
@@ -190,8 +206,10 @@ body {
 %listCounter {
 	list-style-type: none;
 	counter-reset: item;
+
 	li {
 		position: relative;
+
 		&:before {
 			counter-increment: item;
 			content: counter(item);
@@ -201,12 +219,14 @@ body {
 		}
 	}
 }
+
 // Адаптивное видео
 %responsiveVideo {
 	position: relative;
 	overflow: hidden;
 	height: 0;
 	padding-bottom: 56.25%;
+
 	video,
 	iframe,
 	object,
@@ -218,8 +238,10 @@ body {
 		height: 100%;
 	}
 }
+
 // Видео в качестве фона
 %videoBackground {
+
 	video,
 	iframe,
 	object,
@@ -236,28 +258,34 @@ body {
 		background-size: cover;
 	}
 }
+
 // Серый фильтр
 %grayfilter {
 	transition: all 0.3s ease 0s;
 	filter: grayscale(1);
+
 	@media (any-hover: hover) {
 		&:hover {
 			filter: grayscale(0);
 		}
 	}
 }
+
 // Отменить выделение
 %noselect {
 	user-select: none;
 }
+
 // Зеркальное отображение
 %mirror {
 	transform: scale(-1, 1);
 }
+
 // Плавный скролл
 %smoothscroll {
 	-webkit-overflow-scrolling: touch;
 }
+
 // Скрыть скролл
 %hidescroll {
 	&::-webkit-scrollbar {
