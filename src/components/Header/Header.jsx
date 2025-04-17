@@ -2,7 +2,6 @@ import React, { useEffect } from "react";
 import HeaderNav from "./HeaderNav";
 import Burger from "./Burger";
 import { Link } from "react-router-dom";
-
 export default function Header() {
     const navigation = [
         { text: "Наши курсы", link: "/" },
@@ -22,7 +21,9 @@ export default function Header() {
                             direction={"horizontal"}
                             modificator={"header__nav"}
                         />
-                        <a href="#">Вход</a>
+                        <a className="header__button" href="#">
+                            Вход
+                        </a>
                         <Burger />
                     </div>
                 </div>

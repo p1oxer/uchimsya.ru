@@ -1,0 +1,118 @@
+.hero {
+    height: 800px;
+    position: relative;
+    color: #fff;
+    overflow: hidden;
+
+    .container {
+        height: 100%;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+    }
+
+    &__swiper {
+        position: absolute !important;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        z-index: 1;
+
+        .swiper-slide {
+            position: relative;
+            height: 100%;
+            width: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+    }
+
+    &__bg {
+        position: absolute;
+        z-index: -1;
+        width: calc(100% - 3px);
+        height: calc(100% - 3px);
+        overflow: hidden;
+        top: 3px;
+        left: 3px;
+
+        img {
+            width: calc(100% - 3px);
+            height: calc(100% - 3px);
+            object-fit: cover;
+            border-radius: 30px;
+            position: absolute;
+            top: 0;
+            left: 0;
+            user-select: none;
+        }
+    }
+
+    .bg {
+        position: absolute;
+        left: 3px;
+        top: 3px;
+        background-color: rgba(0, 0, 0, 0.5);
+        z-index: 1;
+        border-radius: 30px;
+        width: calc(100% - 6px);
+        height: calc(100% - 6px);
+    }
+}
+
+.body-hero {
+    z-index: 3;
+    color: #fff;
+    border-radius: 10px;
+    position: relative;
+    width: 100%;
+    line-height: 1.4;
+    max-width: 50%;
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+
+    // .body-hero__title
+    &__title {
+        @include adaptiveValue("font-size", 60, 40);
+        font-weight: 600;
+        line-height: 1.2;
+    }
+
+    // .body-hero__subtitle
+    &__subtitle {
+        @include adaptiveValue("font-size", 24, 18);
+        font-weight: 300;
+        color: #f1f1f1;
+    }
+}
+
+/* Контейнер пагинации */
+.swiper-pagination {
+    position: absolute !important;
+    bottom: 20px !important;
+    left: 50% !important;
+    transform: translateX(-50%) !important;
+    z-index: 5 !important;
+}
+
+/* Маркеры пагинации */
+.swiper-pagination-bullet {
+    width: 10px !important;
+    height: 10px !important;
+    background: #fff !important;
+    opacity: 0.6 !important;
+    border-radius: 50% !important;
+    margin: 0 5px !important;
+    transition: all 0.3s ease 0s !important;
+}
+
+/* Активный маркер */
+.swiper-pagination-bullet-active {
+    background: $gradient !important;
+    opacity: 1 !important;
+    width: 30px !important;
+    border-radius: 15px !important;
+}
