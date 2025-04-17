@@ -1,0 +1,31 @@
+.body-advantages {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+    gap: 15px;
+
+    @media (max-width:$mobileSmall) {
+        display: flex;
+        flex-direction: column;
+    }
+}
+
+.item-advantages {
+    padding: 15px;
+    border-radius: 15px;
+    border: 2px solid $blue;
+
+    // .item-advantages__icon
+    &__icon {
+        font-size: 45px;
+        color: $green;
+        margin-bottom: 10px;
+    }
+
+    // .item-advantages__title
+    &__title {
+        margin-bottom: 10px;
+    }
+
+    // .item-advantages__text
+    &__text {}
+}

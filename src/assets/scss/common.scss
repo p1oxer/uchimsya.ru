@@ -2,7 +2,7 @@
     font-weight: 500;
     font-family: Raleway;
     color: #fff;
-    background: $gradient;
+    background: $green;
     padding: 25px 50px;
     border-radius: 15px;
     transition: all 0.3s ease 0s;
@@ -44,4 +44,41 @@
             transform: scale(0.9);
         }
     }
+}
+
+.block-title {
+    @include adaptiveValue("font-size", 56, 30);
+    font-weight: 600;
+    @include adaptiveValue("margin-bottom", 60, 30);
+    width: fit-content;
+    position: relative;
+
+    &::before {
+        content: '';
+        width: 100%;
+        left: 0px;
+        bottom: 0;
+        background-color: $green;
+        height: 30%;
+        position: absolute;
+        z-index: -1;
+    }
+}
+
+.section {
+    @include adaptiveValue("padding-top", 100, 50);
+}
+
+.heading-small {
+    @include adaptiveValue("font-size", 24, 18);
+    font-weight: bold;
+    font-family: Raleway;
+    line-height: 1.2;
+    color: $black;
+}
+
+.text {
+    @include adaptiveValue("font-size", 16, 14);
+    line-height: 1.4;
+    color: #1b1b1b;
 }

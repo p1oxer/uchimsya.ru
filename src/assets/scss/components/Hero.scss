@@ -1,5 +1,5 @@
 .hero {
-    height: 800px;
+    height: 850px;
     position: relative;
     color: #fff;
     overflow: hidden;
@@ -74,10 +74,6 @@
     }
 }
 
-body {
-    height: 5000px;
-}
-
 .body-hero {
     z-index: 3;
     color: #fff;
@@ -112,7 +108,6 @@ body {
     }
 }
 
-/* Контейнер пагинации */
 .swiper-pagination {
     position: absolute !important;
     bottom: 20px !important;
@@ -121,7 +116,6 @@ body {
     z-index: 5 !important;
 }
 
-/* Маркеры пагинации */
 .swiper-pagination-bullet {
     width: 10px !important;
     height: 10px !important;
@@ -132,9 +126,8 @@ body {
     transition: all 0.3s ease 0s !important;
 }
 
-/* Активный маркер */
 .swiper-pagination-bullet-active {
-    background: $gradient !important;
+    background: $green !important;
     opacity: 1 !important;
     width: 30px !important;
     border-radius: 15px !important;
