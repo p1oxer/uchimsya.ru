@@ -9,11 +9,16 @@
     display: flex;
     align-items: center;
     gap: 10px;
-    @include adaptiveValue("font-size", 20, 18);
+    @include adaptiveValue("font-size", 20, 16);
     max-width: fit-content;
 
+    @media (max-width:$mobile) {
+        padding: 15px 40px;
+    }
+
     @media (max-width:$mobileSmall) {
-        width: 100%;
+        min-width: 100%;
+        justify-content: center;
     }
 
     svg {
