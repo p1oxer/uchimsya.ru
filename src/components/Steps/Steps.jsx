@@ -1,6 +1,7 @@
 import React from "react";
 import StepsItem from "./StepsItem";
 import ButtonMain from "../UI/ButtonMain";
+import BackgroundImage from "../UI/BackgroundImage";
 export default function Steps() {
     const steps = [
         {
@@ -18,6 +19,7 @@ export default function Steps() {
     ];
     return (
         <section className="steps section">
+            <BackgroundImage first/>
             <div className="container">
                 <div className="steps__title block-title">
                     Как начать обучение на Учимся.ру?

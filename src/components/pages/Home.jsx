@@ -3,6 +3,7 @@ import Hero from "../Hero";
 import Advantages from "../Advantages/Advantages";
 import PopularCourses from "../PopularCourses/PopularCourses";
 import Steps from "../Steps/Steps";
+import Reviews from "../Reviews/Reviews";
 export default function Home() {
     return (
         <>
@@ -10,6 +11,7 @@ export default function Home() {
             <Advantages />
             <PopularCourses />
             <Steps />
+            <Reviews />
         </>
     );
 }

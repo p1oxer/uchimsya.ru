@@ -12,6 +12,7 @@ import {
     FaUserCircle,
     FaChartLine,
 } from "react-icons/fa";
+import BackgroundImage from "../UI/BackgroundImage";
 export default function Advantages() {
     const advantages = [
         {

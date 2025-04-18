@@ -1,4 +1,9 @@
+body {
+    background-color: #f7f7f7;
+}
+
 .button-main {
+
     font-weight: 500;
     font-family: Raleway;
     color: #fff;
@@ -46,6 +51,18 @@
     }
 }
 
+.section-bg {
+    position: absolute;
+    z-index: -1;
+    max-width: 100%;
+    top: 50%;
+    transform: translateY(-50%);
+    opacity: 0.6;
+    svg {
+        z-index: -1;
+    }
+}
+
 .block-title {
     @include adaptiveValue("font-size", 56, 30);
     font-weight: 600;
@@ -66,8 +83,10 @@
 }
 
 .section {
-    @include adaptiveValue("padding-top", 100, 50);
-
+    @include adaptiveValue("padding-bottom", 100, 50);
+    @include adaptiveValue("padding-top", 50, 25);
+    position: relative;
+    overflow: visible;
 }
 
 .heading-small {

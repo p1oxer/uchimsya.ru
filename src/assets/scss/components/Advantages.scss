@@ -1,7 +1,15 @@
+.advantages {
+    @include adaptiveValue("padding-top", 100, 50);
+    z-index: 1;
+    position: relative;
+}
+
+
 .body-advantages {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
     gap: 30px;
+
 
     @media (max-width:$mobile) {
         gap: 15px;
@@ -16,10 +24,9 @@
 .item-advantages {
     padding: 25px;
     border-radius: 15px;
-    // border: 1px solid $blue;
     box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
     transition: all 0.3s ease 0s;
-
+    background-color: #fff;
     @media (any-hover: hover) {
         &:hover {
             box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);

@@ -1,6 +1,7 @@
 import React from "react";
 import CourseCard from "./CourseCard";
 import ButtonMain from "../UI/ButtonMain";
+import BackgroundImage from "../UI/BackgroundImage";
 
 export default function PopularCourses() {
     const popularCourses = [
@@ -49,6 +50,7 @@ export default function PopularCourses() {
     ];
     return (
         <section className="popular-courses section">
+            <BackgroundImage third />
             <div className="container">
                 <div className="popular-courses__title block-title">Популярные курсы</div>
                 <div className="popular-courses__body body-popular-courses">
@@ -62,7 +64,7 @@ export default function PopularCourses() {
                         />
                     ))}
                 </div>
-                <ButtonMain text={"Все курсы"} modificator={"popular-courses__button"}/>
+                <ButtonMain text={"Все курсы"} modificator={"popular-courses__button"} />
             </div>
         </section>
     );
