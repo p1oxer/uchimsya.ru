@@ -2,6 +2,32 @@
     @include adaptiveValue("padding-top", 100, 50);
     z-index: 1;
     position: relative;
+
+    &::before {
+        content: '';
+        position: absolute;
+        right: 20%;
+        top: 300px;
+        height: 300px;
+        width: 300px;
+        background-color: $green;
+        opacity: 0.7;
+        filter: blur(100px);
+        z-index: -1;
+    }
+
+    &::after {
+        content: '';
+        position: absolute;
+        left: 20%;
+        bottom: 300px;
+        height: 300px;
+        width: 300px;
+        background-color: $green;
+        opacity: 0.5;
+        filter: blur(100px);
+        z-index: -1;
+    }
 }
 
 
@@ -27,6 +53,7 @@
     box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
     transition: all 0.3s ease 0s;
     background-color: #fff;
+
     @media (any-hover: hover) {
         &:hover {
             box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
