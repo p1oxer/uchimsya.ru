@@ -47,25 +47,31 @@ const Hero = () => {
                 <SwiperSlide>
                     <div className="bg"></div>
                     <div className="hero__bg">
-                        <img src="./img/bg.jpg" alt="" />
+                        <img src="./img/hero/01.jpg" alt="" />
                     </div>
                 </SwiperSlide>
                 <SwiperSlide>
                     <div className="bg"></div>
                     <div className="hero__bg">
-                        <img src="./img/bg2.jpg" alt="" />
+                        <img src="./img/hero/02.jpg" alt="" />
                     </div>
                 </SwiperSlide>
                 <SwiperSlide>
                     <div className="bg"></div>
                     <div className="hero__bg">
-                        <img src="./img/bg.jpg" alt="" />
+                        <img src="./img/hero/03.jpg" alt="" />
                     </div>
                 </SwiperSlide>
                 <SwiperSlide>
                     <div className="bg"></div>
                     <div className="hero__bg">
-                        <img src="./img/bg2.jpg" alt="" />
+                        <img src="./img/hero/04.jpg" alt="" />
+                    </div>
+                </SwiperSlide>
+                <SwiperSlide>
+                    <div className="bg"></div>
+                    <div className="hero__bg">
+                        <img src="./img/hero/05.jpg" alt="" />
                     </div>
                 </SwiperSlide>
             </Swiper>
