@@ -57,7 +57,7 @@
         content: '';
         width: 100%;
         left: 0px;
-        bottom: 0;
+        bottom: -5px;
         background-color: $green;
         height: 30%;
         position: absolute;
@@ -72,6 +72,13 @@
 
 .heading-small {
     @include adaptiveValue("font-size", 24, 18);
+    font-weight: bold;
+    font-family: Raleway;
+    line-height: 1.2;
+}
+
+.heading-medium {
+    @include adaptiveValue("font-size", 30, 24);
     font-weight: bold;
     font-family: Raleway;
     line-height: 1.2;

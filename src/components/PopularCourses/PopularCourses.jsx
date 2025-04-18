@@ -1,5 +1,6 @@
 import React from "react";
 import CourseCard from "./CourseCard";
+import ButtonMain from "../UI/ButtonMain";
 
 export default function PopularCourses() {
     const popularCourses = [
@@ -61,6 +62,7 @@ export default function PopularCourses() {
                         />
                     ))}
                 </div>
+                <ButtonMain text={"Все курсы"} modificator={"popular-courses__button"}/>
             </div>
         </section>
     );

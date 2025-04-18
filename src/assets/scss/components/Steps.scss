@@ -1,0 +1,41 @@
+.body-steps {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 30px;
+    padding-top: 50px;
+    row-gap: 70px;
+    @include adaptiveValue("margin-bottom", 130, 30);
+}
+
+.item-steps {
+    text-align: center;
+    position: relative;
+    height: fit-content;
+    // .item-steps__number
+    &__number {
+        position: absolute;
+        left: 50%;
+        transform: translate(-50%, 0px);
+        color: $green;
+        @include adaptiveValue("font-size", 180, 120);
+        font-weight: bold;
+        opacity: 0.5;
+        z-index: -1;
+        top: -50%;
+    }
+
+    // .item-steps__text
+    &__text {
+        font-weight: 400;
+    }
+
+    // .item-steps__icon
+    &__icon {
+        color: $green;
+        font-size: 50px;
+    }
+}
+
+.steps__button {
+    margin: 0px auto;
+}
