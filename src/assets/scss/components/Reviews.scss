@@ -1,9 +1,13 @@
 .reviews {
+    @include adaptiveValue("padding-bottom", 75, 30);
+
     .section-bg {
         right: -200px;
+
         @media (max-width:$mobile) {
             left: 0%;
         }
+
         @media (max-width:$mobileSmall) {
             left: -100%;
         }
@@ -11,18 +15,52 @@
 }
 
 .body-reviews {
-    max-width: 1400px;
-    margin: 0px auto;
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
-    @include adaptiveValue("gap", 30, 15);
+    position: relative;
+    width: 100%;
+    overflow: hidden;
+    box-sizing: border-box;
+    padding: 0 50px;
 
-    @media (max-width:$mobileSmall) {
-        display: flex;
-        flex-direction: column;
+    @media (max-width:$tablet) {
+        padding: 0 20px;
     }
 
-    justify-content: center;
+    @media (max-width:$mobile) {}
+
+    .swiper {
+        padding: 20px 150px;
+        margin: 0 -100px;
+
+        @media (max-width:$mobile) {
+            padding: 20px 50px;
+            margin: 0 -50px;
+        }
+
+        @media (max-width:$mobileSmall) {
+            padding: 20px 0px;
+            margin: 0 0px;
+        }
+    }
+
+    &__swiper-slide {
+        transition: all 0.3s ease 0s;
+
+        &:not(.swiper-slide-active) {
+            .item-reviews {
+                cursor: pointer;
+                opacity: 0.7;
+                transform: scale(0.9);
+            }
+        }
+
+        &.swiper-slide-active {
+            .item-reviews {
+                opacity: 1;
+                transform: scale(1);
+            }
+
+        }
+    }
 }
 
 .item-reviews {
@@ -60,9 +98,6 @@
         gap: 15px;
     }
 
-    // .item-reviews__img
-    &__img {}
-
     // .item-reviews__info
     &__info {}
 
@@ -85,11 +120,17 @@
         aspect-ratio: 1/1;
         flex: 1 0 auto;
 
+        @media (max-width:$mobileSmall) {
+            max-height: 75px;
+            max-width: 75px;
+        }
+
         img {
             max-width: 100%;
             height: 100%;
             width: 100%;
             object-fit: cover;
+
         }
     }
 }

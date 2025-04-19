@@ -47,7 +47,7 @@ export default function Footer() {
                         <ul>
                             {navigation.map((item, index) => {
                                 return (
-                                    <li>
+                                    <li key={index}>
                                         <a href={item.link}>{item.text}</a>
                                     </li>
                                 );
@@ -59,7 +59,9 @@ export default function Footer() {
                         <p className="text">Перезвоним в течение 5-ти минут</p>
                         <input type="tel" placeholder="Номер телефона*" required />
                         <input type="text" placeholder="Ваше имя" />
-                        <button type="button" className="button-main">Отправить</button>
+                        <button type="button" className="button-main">
+                            Отправить
+                        </button>
                     </form>
                 </div>
                 <p className="footer__copyright">
