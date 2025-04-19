@@ -4,6 +4,7 @@ import Advantages from "../Advantages/Advantages";
 import PopularCourses from "../PopularCourses/PopularCourses";
 import Steps from "../Steps/Steps";
 import Reviews from "../Reviews/Reviews";
+import Faq from "../FAQ/Faq";
 export default function Home() {
     return (
         <>
@@ -12,6 +13,7 @@ export default function Home() {
             <PopularCourses />
             <Steps />
             <Reviews />
+            <Faq />
         </>
     );
 }

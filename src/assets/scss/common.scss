@@ -58,6 +58,7 @@ body {
     top: 50%;
     transform: translateY(-50%);
     opacity: 0.6;
+
     svg {
         z-index: -1;
     }
@@ -107,4 +108,112 @@ body {
     @include adaptiveValue("font-size", 16, 14);
     line-height: 1.4;
     color: #1b1b1b;
+}
+
+
+.accordion {
+    border: 2px solid $green;
+    background: #fff;
+    border-radius: 15px;
+    margin: 10px 0;
+    overflow: hidden;
+    transition: all 0.3s ease;
+    max-width: 1000px;
+    margin: 0px auto;
+    width: 100%;
+
+    &:not(:last-child) {
+        margin-bottom: rem(30);
+
+        @media (max-width:$mobile) {
+            margin-bottom: rem(15);
+        }
+    }
+}
+
+.accordion__header {
+    padding: 30px;
+    cursor: pointer;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    transition: background-color 0.3s ease;
+    gap: 10px;
+    font-family: Raleway;
+    @media (max-width:$mobile) {
+        padding: 15px;
+    }
+
+    span {
+        svg {
+            transition: all 0.3s ease 0s;
+        }
+    }
+
+    .opened & {
+        span {
+            svg {
+                transform: rotate(-180deg);
+
+            }
+        }
+    }
+
+    @media (any-hover: hover) {
+        &:hover {
+            background-color: #f7f7f7;
+        }
+    }
+}
+
+.accordion__header p {
+    margin: 0;
+    @include adaptiveValue("font-size", 24, 18);
+}
+
+.accordion__content {
+    overflow: hidden;
+    transition: max-height 0.3s ease;
+    max-height: 0;
+}
+
+.accordion__content-inner {
+    padding: 30px;
+    border-top: 1px solid $green;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    font-weight: 400;
+
+    @media (max-width:$mobile) {
+        padding: 15px;
+    }
+}
+
+.faq {
+    &::before {
+        content: '';
+        position: absolute;
+        right: 20%;
+        top: 300px;
+        height: 300px;
+        width: 300px;
+        background-color: $green;
+        opacity: 0.4;
+        filter: blur(100px);
+        z-index: -1;
+    }
+
+    &::after {
+        content: '';
+        position: absolute;
+        left: 20%;
+        bottom: 300px;
+        height: 300px;
+        width: 300px;
+        background-color: $green;
+        opacity: 0.5;
+        filter: blur(100px);
+        z-index: -1;
+    }
 }
