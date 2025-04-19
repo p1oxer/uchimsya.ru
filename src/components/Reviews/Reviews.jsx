@@ -1,5 +1,6 @@
 import React from "react";
 import ReviewsItem from "./reviewsItem";
+import BackgroundImage from "../UI/BackgroundImage";
 export default function reviews() {
     const reviews = [
         {
@@ -21,6 +22,7 @@ export default function reviews() {
     ];
     return (
         <section className="reviews section">
+            <BackgroundImage second/>
             <div className="container">
                 <div className="reviews__title block-title">Что о нас говорят?</div>
                 <div className="reviews__body body-reviews">
