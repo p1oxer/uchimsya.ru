@@ -19,7 +19,7 @@ export default function Steps() {
     ];
     return (
         <section className="steps section">
-            <BackgroundImage first/>
+            <BackgroundImage first />
             <div className="container">
                 <div className="steps__title block-title">
                     Как начать обучение на Учимся.ру?

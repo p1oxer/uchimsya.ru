@@ -8,13 +8,13 @@
 // Подключить если есть локальные файлы шрифтов
 //@import "fonts/fonts";
 @import url(https://fonts.googleapis.com/css?family=Raleway:100,200,300,regular,500,600,700,800,900&display=swap);
-@import url(https://fonts.googleapis.com/css?family=Open+Sans:300,regular,500,600,700,800&display=swap);
+@import url(https://fonts.googleapis.com/css?family=Roboto:300,regular,500,600,700,800&display=swap);
 // Подключение иконочных шрифтов ==============================================================================================================================================================================================================================================================================
 // Подключить если есть файл иконочного шрифта
 //@import "fonts/icons";
 
 // Шрифт по умолчанию ==============================================================================================================================================================================================================================================================================
-$fontFamily: "Open Sans";
+$fontFamily: "Roboto";
 $fontSize: rem(14); // где 14(px) - размер шрифта по умолчанию из макета
 
 // Основные цвета
@@ -45,9 +45,6 @@ $tablet: em(991.98); // Планшеты, некоторые телефоны в
 $mobile: em(767.98); // Телефоны L
 $mobileSmall: em(479.98); // Телефоны S
 
-// Тип адаптива:
-// 1 = отзывчивость (у контейнера нет брейкпоинтов),
-// 2 = по брейк-поинтам (контейнер меняет свою ширину по брейк-поинтам)
 $responsiveType: 1;
 
 // Обнуление и общие параметры ============================================================================================================================================================================================== =============================================================================================== ===============================================================================================
@@ -83,14 +80,6 @@ body {
 	}
 }
 
-// Ограничивающий контейнер ======================================================================================================================================================================================================================
-
-/*
-(i) Стили будут применяться ко 
-всем классам содержащим *__container
-Например header__container, main__container и т.д.
-Снипет (HTML): cnt
-*/
 @if ($responsiveType==1) {
 
 	// Отзывчивая
@@ -153,148 +142,5 @@ body {
 				padding: 0 rem(math.div($containerPadding, 2));
 			}
 		}
-	}
-}
-
-
-// Общий файл элементов форм
-// Для подключения/отключения стилей конкретного єлемента формы смотри base/forms/forms.scss
-@import "base/forms/forms";
-
-// Стили попапов
-// @import "base/popup";
-
-// Стили спойлеров
-// @import "base/spollers";
-
-// Стили табов
-// @import "base/tabs";
-
-// Стили карт
-// @import "base/maps";
-
-// Стили блока "показать еще"
-// @import "base/showmore";
-
-// Стили для полноэкранного блока
-// @import "base/fullscreen";
-
-// Стили для липкого блока
-// @import "base/sticky";
-
-// Стили для отзывчивых картинок (IBG)
-// Сниппет (HTML): ibg (div c картинкой и классами)
-// Сниппет (HTML): ibga (a c картинкой и классами)
-[class*="-ibg"] {
-	position: relative;
-
-	img {
-		position: absolute;
-		width: 100%;
-		height: 100%;
-		top: 0;
-		left: 0;
-		object-fit: cover;
-	}
-}
-
-[class*="-ibg_contain"] {
-	img {
-		object-fit: contain;
-	}
-}
-
-// Шаблоны (заготовки)
-// @extend %имя шаблона;
-// Сниппет (SCSS): ex
-
-// Счетчик для списка
-%listCounter {
-	list-style-type: none;
-	counter-reset: item;
-
-	li {
-		position: relative;
-
-		&:before {
-			counter-increment: item;
-			content: counter(item);
-			position: absolute;
-			left: 0;
-			top: 0;
-		}
-	}
-}
-
-// Адаптивное видео
-%responsiveVideo {
-	position: relative;
-	overflow: hidden;
-	height: 0;
-	padding-bottom: 56.25%;
-
-	video,
-	iframe,
-	object,
-	embed {
-		position: absolute;
-		top: 0;
-		left: 0;
-		width: 100%;
-		height: 100%;
-	}
-}
-
-// Видео в качестве фона
-%videoBackground {
-
-	video,
-	iframe,
-	object,
-	embed {
-		position: fixed;
-		top: 50%;
-		left: 50%;
-		min-width: 100%;
-		min-height: 100%;
-		width: auto;
-		height: auto;
-		z-index: -100;
-		transform: translateX(-50%) translateY(-50%);
-		background-size: cover;
-	}
-}
-
-// Серый фильтр
-%grayfilter {
-	transition: all 0.3s ease 0s;
-	filter: grayscale(1);
-
-	@media (any-hover: hover) {
-		&:hover {
-			filter: grayscale(0);
-		}
-	}
-}
-
-// Отменить выделение
-%noselect {
-	user-select: none;
-}
-
-// Зеркальное отображение
-%mirror {
-	transform: scale(-1, 1);
-}
-
-// Плавный скролл
-%smoothscroll {
-	-webkit-overflow-scrolling: touch;
-}
-
-// Скрыть скролл
-%hidescroll {
-	&::-webkit-scrollbar {
-		display: none;
 	}
 }

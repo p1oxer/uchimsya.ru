@@ -40,7 +40,7 @@ export default function reviews() {
     ];
     return (
         <section className="reviews section">
-            <BackgroundImage second />
+            <BackgroundImage second isAnimated={true} />
             <div className="container">
                 <div className="reviews__title block-title">Что о нас говорят?</div>
             </div>

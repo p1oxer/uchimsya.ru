@@ -22,13 +22,13 @@ export default function Footer() {
                 <div className="footer__body body-footer">
                     <ul className="body-footer__list">
                         <li>
-                            <FaPhone />
+                            {/* <FaPhone /> */}
                             <a className="link" href="tel:+79000000000">
                                 +7 (000) 000-00-00
                             </a>
                         </li>
                         <li>
-                            <FaLocationDot />
+                            {/* <FaLocationDot /> */}
                             г. Вологда, ул. Учебная 35Б
                         </li>
                         <li className="body-footer__socials socials">
@@ -56,7 +56,7 @@ export default function Footer() {
                     </nav>
                     <form action="" className="body-footer__form">
                         <p className="heading-small">Остались вопросы?</p>
-                        <p className="text">Перезвоним в течение 5-ти минут</p>
+                        <p className="text">Перезвоним в течение 5 минут</p>
                         <input type="tel" placeholder="Номер телефона*" required />
                         <input type="text" placeholder="Ваше имя" />
                         <button type="button" className="button-main">

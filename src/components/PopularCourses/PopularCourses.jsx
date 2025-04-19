@@ -50,7 +50,7 @@ export default function PopularCourses() {
     ];
     return (
         <section className="popular-courses section">
-            <BackgroundImage third />
+            <BackgroundImage third isAnimated={true} />
             <div className="container">
                 <div className="popular-courses__title block-title">Популярные курсы</div>
                 <div className="popular-courses__body body-popular-courses">

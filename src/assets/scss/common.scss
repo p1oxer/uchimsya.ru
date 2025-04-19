@@ -59,8 +59,27 @@ body {
     transform: translateY(-50%);
     opacity: 0.6;
 
+    &.animated {
+        animation: bgAnimation 5s infinite linear;
+    }
+
     svg {
         z-index: -1;
+    }
+}
+
+@keyframes bgAnimation {
+    0% {
+        transform: translateY(-50%);
+        ;
+    }
+
+    50% {
+        transform: translateY(-49.5%);
+    }
+
+    100% {
+        transform: translateY(-50%);
     }
 }
 
@@ -140,6 +159,7 @@ body {
     transition: background-color 0.3s ease;
     gap: 10px;
     font-family: Raleway;
+
     @media (max-width:$mobile) {
         padding: 15px;
     }

@@ -1,8 +1,8 @@
 import React from "react";
 
-export default function BackgroundImage({ first, second, third }) {
+export default function BackgroundImage({ first, second, third, isAnimated }) {
     return (
-        <div className="section-bg">
+        <div className={isAnimated ? "section-bg animated" : "section-bg"}>
             {first && (
                 <svg
                     width="1920"

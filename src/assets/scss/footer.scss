@@ -72,9 +72,9 @@
             display: flex;
             flex-direction: row;
             align-items: center;
-            @include adaptiveValue("font-size", 20, 16);
+            @include adaptiveValue("font-size", 24, 20);
             gap: 10px;
-
+            font-weight: 300;
             &:first-child {
                 white-space: nowrap;
             }
@@ -99,6 +99,7 @@
 
         li {
             @include adaptiveValue("font-size", 20, 18);
+            font-weight: 300;
         }
     }
 
