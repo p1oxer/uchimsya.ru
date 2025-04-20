@@ -3,6 +3,7 @@ import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
 import StoriesItem from "./StoriesItem";
 import { Navigation } from "swiper/modules";
+
 export default function Stories() {
     const successStories = [
         {
@@ -47,7 +48,19 @@ export default function Stories() {
                 </p>
             </div>
             <div className="stories__body body-stories">
-                <Swiper slidesPerView={1} centeredSlides={true} modules={[Navigation]}>
+                <Swiper
+                    slidesPerView={1}
+                    centeredSlides={true}
+                    modules={[Navigation]}
+                    breakpoints={{
+                        600: {
+                            spaceBetween: 0,
+                        },
+                        900: {
+                            spaceBetween: -20,
+                        },
+                    }}
+                >
                     {successStories.map((item, index) => {
                         return (
                             <SwiperSlide key={index}>
