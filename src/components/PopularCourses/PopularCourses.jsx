@@ -1,9 +1,19 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import CourseCard from "./CourseCard";
 import ButtonMain from "../UI/ButtonMain";
 import BackgroundImage from "../UI/BackgroundImage";
+import { loadImages } from "../../helpers";
 
 export default function PopularCourses() {
+    const [imagePaths, setImagePaths] = useState([]);
+
+    useEffect(() => {
+        const images = import.meta.glob(
+            "../../assets/images/popularCourses/*.{png,jpg,jpeg,svg}"
+        );
+        loadImages(images).then(setImagePaths);
+    }, []);
+
     const popularCourses = [
         {
             img: "python",
@@ -48,21 +58,36 @@ export default function PopularCourses() {
                 "Освойте базовые принципы композиции, типографики и цветоведения для создания профессиональных проектов.",
         },
     ];
+
+    // Создаем новый массив курсов с путями изображений
+    const coursesWithImages = popularCourses.map((course) => {
+        const imagePath = imagePaths.find((path) => {
+            const imageName = path.split("/").pop().split(".")[0]; // Получаем имя файла без расширения
+            return imageName === course.img; // Сравниваем с img
+        });
+        return {
+            ...course,
+            img: imagePath || "", // Если изображение не найдено, присваиваем пустую строку
+        };
+    });
+
     return (
         <section className="popular-courses section">
             <BackgroundImage third isAnimated={true} />
             <div className="container">
                 <div className="popular-courses__title block-title">Популярные курсы</div>
                 <div className="popular-courses__body body-popular-courses">
-                    {popularCourses.map((course, index) => (
-                        <CourseCard
-                            key={index}
-                            img={course.img}
-                            title={course.title}
-                            duration={course.duration}
-                            description={course.description}
-                        />
-                    ))}
+                    {coursesWithImages.map((course, index) =>
+                        course.img ? ( // Проверяем, есть ли путь к изображению
+                            <CourseCard
+                                key={index}
+                                img={course.img} // Передаем путь к изображению
+                                title={course.title}
+                                duration={course.duration}
+                                description={course.description}
+                            />
+                        ) : null // Если изображения нет, ничего не отображаем
+                    )}
                 </div>
                 <ButtonMain text={"Все курсы"} modificator={"popular-courses__button"} />
             </div>

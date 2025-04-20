@@ -1,19 +1,23 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Autoplay, EffectFade, Pagination } from "swiper/modules";
 import "swiper/css";
 import "swiper/css/effect-fade";
 import "swiper/css/pagination";
 import { FaArrowRightLong } from "react-icons/fa6";
+import HeroItem from "./HeroItem";
+import { loadImages } from "../../helpers";
 
 const Hero = () => {
-    // useEffect(() => {
-    //     const headerHeight = document.querySelector(".header").clientHeight;
-    //     headerHeight
-    //         ? (document.querySelector(".hero__body").style.paddingTop =
-    //               headerHeight + "px")
-    //         : null;
-    // }, []);
+    const [imagePaths, setImagePaths] = useState([]);
+
+    useEffect(() => {
+        const heroImages = import.meta.glob(
+            "../../assets/images/hero/*.{png,jpg,jpeg,svg}"
+        );
+        loadImages(heroImages).then(setImagePaths);
+    }, []);
+
     return (
         <section className="hero">
             <div className="container">
@@ -44,36 +48,11 @@ const Hero = () => {
                     clickable: true,
                 }}
             >
-                <SwiperSlide>
-                    <div className="bg"></div>
-                    <div className="hero__bg">
-                        <img src="./img/hero/01.jpg" alt="" />
-                    </div>
-                </SwiperSlide>
-                <SwiperSlide>
-                    <div className="bg"></div>
-                    <div className="hero__bg">
-                        <img src="./img/hero/02.jpg" alt="" />
-                    </div>
-                </SwiperSlide>
-                <SwiperSlide>
-                    <div className="bg"></div>
-                    <div className="hero__bg">
-                        <img src="./img/hero/03.jpg" alt="" />
-                    </div>
-                </SwiperSlide>
-                <SwiperSlide>
-                    <div className="bg"></div>
-                    <div className="hero__bg">
-                        <img src="./img/hero/04.jpg" alt="" />
-                    </div>
-                </SwiperSlide>
-                <SwiperSlide>
-                    <div className="bg"></div>
-                    <div className="hero__bg">
-                        <img src="./img/hero/05.jpg" alt="" />
-                    </div>
-                </SwiperSlide>
+                {imagePaths.map((path, index) => (
+                    <SwiperSlide key={index}>
+                        <HeroItem path={path} index={index} />
+                    </SwiperSlide>
+                ))}
             </Swiper>
         </section>
     );

@@ -1,4 +1,4 @@
-import React, { useRef } from "react";
+import React, { useRef, useEffect, useState } from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
 import StoriesItem from "./StoriesItem";
@@ -9,19 +9,19 @@ export default function Stories() {
     const swiperRef = useRef();
     const swiperButtonPrev = useRef(null);
     const swiperButtonNext = useRef(null);
+    const [imagePaths, setImagePaths] = useState([]);
 
-    function handleButtonDisabling(swiper) {
-        if (swiper.isBeginning) {
-            swiperButtonPrev.current?.classList.add("swiper-btn-disabled");
-        } else {
-            swiperButtonPrev.current?.classList.remove("swiper-btn-disabled");
-        }
-        if (swiper.isEnd) {
-            swiperButtonNext.current?.classList.add("swiper-btn-disabled");
-        } else {
-            swiperButtonNext.current?.classList.remove("swiper-btn-disabled");
-        }
-    }
+    useEffect(() => {
+        const heroImages = import.meta.glob("../../assets/img/hero/*.{png,jpg,jpeg,svg}");
+
+        // Получаем массив функций, возвращаемых `import.meta.glob`
+        const imagePromises = Object.keys(heroImages).map((key) => heroImages[key]());
+
+        // Используем Promise.all для получения всех путей к изображениям
+        Promise.all(imagePromises).then((resolvedPaths) => {
+            setImagePaths(resolvedPaths.map((img) => img.default)); // Получаем URL изображений
+        });
+    }, []);
 
     const successStories = [
         {
@@ -29,32 +29,32 @@ export default function Stories() {
             oldProfession: "Бухгалтер",
             newProfession: "Frontend-разработчик",
             courseName: "Основы веб-разработки: HTML, CSS, JavaScript",
-            story: "Раньше я работала бухгалтером и каждый день чувствовала, что это не моё. Хотелось творить и создавать что-то новое. Когда я узнала о курсах по программированию, решила попробовать. Сначала было сложно, но я не сдавалась. Сейчас работаю frontend-разработчиком и счастлива, что нашла дело, которое приносит радость",
-            img: "01",
+            story: "Раньше я работала бухгалтером и каждый день чувствовала, что это не моё. Хотелось творить и создавать что-то новое...",
+            imgIndex: 0, // Индекс изображения
         },
         {
             name: "Дмитрий Иванов",
             oldProfession: "Менеджер по продажам",
             newProfession: "Data Scientist",
             courseName: "Анализ данных с Python: от новичка до профессионала",
-            story: "Я всегда любил математику и аналитику, но моя работа в продажах не давала возможности развиваться в этом направлении. Пройдя курс по анализу данных, я открыл для себя новый мир. Теперь я data scientist в крупной компании и каждый день решаю интересные задачи",
-            img: "02",
+            story: "Я всегда любил математику и аналитику, но моя работа в продажах не давала возможности развиваться...",
+            imgIndex: 1, // Индекс изображения
         },
         {
             name: "Екатерина Смирнова",
             oldProfession: "Домохозяйка",
             newProfession: "Учитель английского языка",
             courseName: "Говорите уверенно: курс английского языка для начинающих",
-            story: "После рождения ребенка я долгое время была дома и чувствовала, что теряю связь с внешним миром. Решила начать учить английский язык, чтобы не только самой стать увереннее, но и помочь детям с их учебой. Курсы помогли мне выучить язык и даже начать преподавать его. Теперь я учу других и получаю огромное удовольствие от этого",
-            img: "03",
+            story: "После рождения ребенка я долгое время была дома и чувствовала, что теряю связь с внешним миром...",
+            imgIndex: 2, // Индекс изображения
         },
         {
             name: "Алексей Кузнецов",
             oldProfession: "Офисный работник",
             newProfession: "Профессиональный фотограф",
             courseName: "Искусство фотографии: от любителя до профессионала",
-            story: "Всегда увлекался фотографией, но считал это просто хобби. После прохождения курса я понял, что могу превратить свое увлечение в профессию. Сейчас я работаю фотографом и снимаю свадьбы, портреты и рекламные кампании. Это то, о чем я всегда мечтал!",
-            img: "04",
+            story: "Всегда увлекался фотографией, но считал это просто хобби...",
+            imgIndex: 3, // Индекс изображения
         },
     ];
 
@@ -70,34 +70,18 @@ export default function Stories() {
                 <Swiper
                     slidesPerView={1}
                     centeredSlides={true}
-                    breakpoints={{
-                        600: {
-                            spaceBetween: 0,
-                        },
-                        900: {
-                            spaceBetween: -20,
-                        },
-                    }}
                     modules={[Navigation]}
                     navigation={{
                         nextEl: swiperButtonNext.current,
                         prevEl: swiperButtonPrev.current,
                     }}
-                    onReachBeginning={() => {
-                        swiperButtonPrev.current?.classList.add("swiper-btn-disabled");
-                    }}
-                    onReachEnd={() => {
-                        swiperButtonNext.current?.classList.add("swiper-btn-disabled");
-                    }}
-                    onSlideChange={(swiper) => handleButtonDisabling(swiper)}
                     onSwiper={(swiper) => {
                         swiperRef.current = swiper;
-                        handleButtonDisabling(swiper);
                     }}
                 >
                     {successStories.map((item, index) => (
                         <SwiperSlide key={index}>
-                            <StoriesItem item={item} />
+                            <StoriesItem item={item} imagePath={imagePaths[item.imgIndex]} /> {/* Передаем путь к изображению */}
                         </SwiperSlide>
                     ))}
                 </Swiper>
@@ -112,7 +96,7 @@ export default function Stories() {
                 <SwiperButton
                     direction={"next"}
                     modificator={"stories-swiper"}
-                    onClick={() => swiperRef.current.slideNext()} // Исправлено здесь
+                    onClick={() => swiperRef.current.slideNext()}
                     ref={swiperButtonNext}
                 />
             </div>

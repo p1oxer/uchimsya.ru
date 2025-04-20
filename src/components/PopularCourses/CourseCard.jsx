@@ -4,7 +4,7 @@ export default function CourseCard({ img, title, duration, description }) {
     return (
         <a href="#" className="course-card">
             <div className="course-card__img">
-                <img src={`./img/popularCourses/${img}.jpg`} alt="" />
+                <img loading="lazy" src={`${img}`} alt="" />
             </div>
             <div className="course-card__body">
                 <div className="course-card__title heading-small">{title}</div>
