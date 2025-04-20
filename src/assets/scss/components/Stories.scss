@@ -40,6 +40,12 @@
         margin-left: auto;
         @include adaptiveValue("margin-bottom", 40, 20);
         @include adaptiveValue("font-size", 44, 26);
+        text-align: center;
+
+        &::before {
+            content: '';
+            width: 0;
+        }
     }
 
     &__subtitle {
@@ -47,21 +53,6 @@
         text-align: center;
         @include adaptiveValue("font-size", 20, 16);
         @include adaptiveValue("margin-bottom", 40, 20);
-    }
-}
-
-.story {
-    min-height: 500px;
-    transition: transform 0.3s ease 0s;
-    will-change: tranform;
-    display: flex;
-
-    @media (max-width: em(900)) {
-        min-height: 300px;
-    }
-
-    @media (max-width: em(550)) {
-        min-height: 550px;
     }
 }
 
@@ -111,6 +102,25 @@
         }
     }
 }
+
+.story {
+    min-height: 500px;
+    transition: transform 0.3s ease 0s;
+    will-change: tranform;
+    display: flex;
+    position: relative;
+    overflow: hidden;
+
+    @media (max-width: em(900)) {
+        min-height: 300px;
+    }
+
+    @media (max-width: em(550)) {
+        min-height: 550px;
+    }
+}
+
+
 
 .body-story {
     padding: 40px;
@@ -207,8 +217,9 @@
         display: flex;
         align-items: center;
         justify-content: center;
+        z-index: 4;
 
-        @media (min-width:em(900)) {
+        @media (min-width:em(901)) {
             display: none;
         }
 
@@ -217,5 +228,65 @@
             width: 16px;
             height: 16px;
         }
+    }
+}
+
+.modal-story {
+    z-index: 3;
+    display: none;
+    transition: opacity 0.3s ease-in-out 0s;
+    font-weight: 300;
+    will-change: opacity;
+    overflow: hidden;
+
+    @media (max-width: em(900)) {
+        position: absolute;
+        display: flex;
+        backdrop-filter: blur(50px);
+        border-radius: 0 0 30px 30px;
+        opacity: 0;
+        left: 0;
+        bottom: 0;
+
+        @media (max-width:$mobile) {
+            border-radius: 0 0 15px 15px;
+        }
+
+        &.visible {
+            opacity: 1;
+        }
+    }
+
+    &::before {
+        content: '';
+        width: 100%;
+        height: 100%;
+        background: linear-gradient(180deg, rgba(0, 0, 0, 0.3) 0%, rgba(0, 0, 0, 0.6) 100%);
+        position: absolute;
+        z-index: -1;
+        bottom: 0;
+        left: 0;
+    }
+
+    // .modal-story__body
+    &__body {
+        padding: 15px;
+        color: #fff;
+    }
+
+    // .modal-story__top
+    &__top {
+        @include adaptiveValue("font-size", 18, 16, 900, 320);
+        margin-bottom: 10px;
+
+        a {
+            text-decoration: underline;
+        }
+    }
+
+    // .modal-story__text
+    &__text {
+        line-height: 1.2;
+        padding-right: 20px;
     }
 }
