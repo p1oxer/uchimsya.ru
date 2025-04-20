@@ -5,6 +5,7 @@ import PopularCourses from "../PopularCourses/PopularCourses";
 import Steps from "../Steps/Steps";
 import Reviews from "../Reviews/Reviews";
 import Faq from "../FAQ/Faq";
+import Stories from "../Stories/Stories";
 export default function Home() {
     return (
         <>
@@ -12,6 +13,7 @@ export default function Home() {
             <Advantages />
             <PopularCourses />
             <Steps />
+            <Stories />
             <Reviews />
             <Faq />
         </>

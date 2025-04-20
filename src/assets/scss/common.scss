@@ -59,33 +59,13 @@ body {
     transform: translateY(-50%);
     opacity: 0.6;
 
-    &.animated {
-        animation: bgAnimation 5s infinite linear;
-    }
-
     svg {
         z-index: -1;
     }
 }
-
-@keyframes bgAnimation {
-    0% {
-        transform: translateY(-50%);
-        ;
-    }
-
-    50% {
-        transform: translateY(-49.5%);
-    }
-
-    100% {
-        transform: translateY(-50%);
-    }
-}
-
 .block-title {
     @include adaptiveValue("font-size", 56, 30);
-    font-weight: 600;
+    font-weight: 500;
     @include adaptiveValue("margin-bottom", 60, 30);
     width: fit-content;
     position: relative;
@@ -96,7 +76,7 @@ body {
         left: 0px;
         bottom: -5px;
         background-color: $green;
-        height: 30%;
+        height: 20%;
         position: absolute;
         z-index: -1;
     }
