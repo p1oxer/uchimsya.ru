@@ -1,10 +1,28 @@
-import React from "react";
+import React, { useRef } from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
 import StoriesItem from "./StoriesItem";
 import { Navigation } from "swiper/modules";
+import SwiperButton from "../UI/SwiperButton";
 
 export default function Stories() {
+    const swiperRef = useRef();
+    const swiperButtonPrev = useRef(null);
+    const swiperButtonNext = useRef(null);
+
+    function handleButtonDisabling(swiper) {
+        if (swiper.isBeginning) {
+            swiperButtonPrev.current?.classList.add("swiper-btn-disabled");
+        } else {
+            swiperButtonPrev.current?.classList.remove("swiper-btn-disabled");
+        }
+        if (swiper.isEnd) {
+            swiperButtonNext.current?.classList.add("swiper-btn-disabled");
+        } else {
+            swiperButtonNext.current?.classList.remove("swiper-btn-disabled");
+        }
+    }
+
     const successStories = [
         {
             name: "Анна Петрова",
@@ -39,6 +57,7 @@ export default function Stories() {
             img: "04",
         },
     ];
+
     return (
         <section className="stories section">
             <div className="container">
@@ -51,7 +70,6 @@ export default function Stories() {
                 <Swiper
                     slidesPerView={1}
                     centeredSlides={true}
-                    modules={[Navigation]}
                     breakpoints={{
                         600: {
                             spaceBetween: 0,
@@ -60,15 +78,43 @@ export default function Stories() {
                             spaceBetween: -20,
                         },
                     }}
+                    modules={[Navigation]}
+                    navigation={{
+                        nextEl: swiperButtonNext.current,
+                        prevEl: swiperButtonPrev.current,
+                    }}
+                    onReachBeginning={() => {
+                        swiperButtonPrev.current?.classList.add("swiper-btn-disabled");
+                    }}
+                    onReachEnd={() => {
+                        swiperButtonNext.current?.classList.add("swiper-btn-disabled");
+                    }}
+                    onSlideChange={(swiper) => handleButtonDisabling(swiper)}
+                    onSwiper={(swiper) => {
+                        swiperRef.current = swiper;
+                        handleButtonDisabling(swiper);
+                    }}
                 >
-                    {successStories.map((item, index) => {
-                        return (
-                            <SwiperSlide key={index}>
-                                <StoriesItem item={item} />
-                            </SwiperSlide>
-                        );
-                    })}
+                    {successStories.map((item, index) => (
+                        <SwiperSlide key={index}>
+                            <StoriesItem item={item} />
+                        </SwiperSlide>
+                    ))}
                 </Swiper>
+            </div>
+            <div className="swiper-buttons">
+                <SwiperButton
+                    direction={"prev"}
+                    modificator={"stories-swiper"}
+                    onClick={() => swiperRef.current.slidePrev()}
+                    ref={swiperButtonPrev}
+                />
+                <SwiperButton
+                    direction={"next"}
+                    modificator={"stories-swiper"}
+                    onClick={() => swiperRef.current.slideNext()} // Исправлено здесь
+                    ref={swiperButtonNext}
+                />
             </div>
         </section>
     );

@@ -1,9 +1,27 @@
-import React from "react";
+import React, { useRef } from "react";
 import ReviewsItem from "./reviewsItem";
 import BackgroundImage from "../UI/BackgroundImage";
 import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
+import SwiperButton from "../UI/SwiperButton";
+import { Navigation } from "swiper/modules";
 export default function reviews() {
+    const swiperRef = useRef();
+    const swiperButtonPrev = useRef(null);
+    const swiperButtonNext = useRef(null);
+
+    function handleButtonDisabling(swiper) {
+        if (swiper.isBeginning) {
+            swiperButtonPrev.current?.classList.add("swiper-btn-disabled");
+        } else {
+            swiperButtonPrev.current?.classList.remove("swiper-btn-disabled");
+        }
+        if (swiper.isEnd) {
+            swiperButtonNext.current?.classList.add("swiper-btn-disabled");
+        } else {
+            swiperButtonNext.current?.classList.remove("swiper-btn-disabled");
+        }
+    }
     const reviews = [
         {
             text: "Начав заниматься на Учимся.ру полгода назад, я заметно расширила свой кругозор и профессиональные навыки. Особенно ценно то, что курсы разработаны с учетом разных уровней подготовки - от новичка до продвинутого уровня. Отдельное спасибо за активное сообщество: обсуждения в комментариях часто помогают разобраться со сложными темами быстрее, чем это сделал бы преподаватель.",
@@ -54,7 +72,6 @@ export default function reviews() {
             <div className="reviews__body body-reviews">
                 <Swiper
                     slidesPerView={3}
-                    // spaceBetween={15}
                     centeredSlides={true}
                     watchSlidesProgress={true} // Отслеживание прогресса слайдов
                     onClick={(swiper) => {
@@ -70,6 +87,22 @@ export default function reviews() {
                         1200: {
                             slidesPerView: 3,
                         },
+                    }}
+                    modules={[Navigation]}
+                    navigation={{
+                        nextEl: swiperButtonNext.current,
+                        prevEl: swiperButtonPrev.current,
+                    }}
+                    onReachBeginning={() => {
+                        swiperButtonPrev.current?.classList.add("swiper-btn-disabled");
+                    }}
+                    onReachEnd={() => {
+                        swiperButtonNext.current?.classList.add("swiper-btn-disabled");
+                    }}
+                    onSlideChange={(swiper) => handleButtonDisabling(swiper)}
+                    onSwiper={(swiper) => {
+                        swiperRef.current = swiper;
+                        handleButtonDisabling(swiper);
                     }}
                 >
                     {reviews.map((review, index) => {
@@ -88,6 +121,20 @@ export default function reviews() {
                         );
                     })}
                 </Swiper>
+                <div className="swiper-buttons">
+                    <SwiperButton
+                        direction={"prev"}
+                        modificator={"stories-swiper"}
+                        onClick={() => swiperRef.current.slidePrev()}
+                        ref={swiperButtonPrev}
+                    />
+                    <SwiperButton
+                        direction={"next"}
+                        modificator={"stories-swiper"}
+                        onClick={() => swiperRef.current.slideNext()} // Исправлено здесь
+                        ref={swiperButtonNext}
+                    />
+                </div>
             </div>
         </section>
     );
