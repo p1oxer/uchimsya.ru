@@ -87,7 +87,10 @@ export default function Stories() {
                 <SwiperButton
                     direction={"next"}
                     modificator={"stories-swiper"}
-                    onClick={() => swiperRef.current.slideNext()}
+                    onClick={() => {
+                        swiperRef.current.slideNext();
+                        console.log("next");
+                    }}
                     ref={swiperButtonNext}
                 />
             </div>

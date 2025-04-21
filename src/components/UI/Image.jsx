@@ -1,6 +1,6 @@
 import React from "react";
 
-export default function ImageForCourses({ imagePath, alt, sizes }) {
+export default function Image({ imagePath, alt, sizes }) {
     // Проверяем, что imagePath не пустой
     if (!imagePath) {
         return <img src="/path/to/default-image.jpg" alt="default" />;

@@ -13,7 +13,6 @@ export default function SwiperButton({
 
     return direction == "prev" ? (
         <button
-            onClick={swiper ? () => swiper.slidePrev() : onClick}
             title="swiper-btn"
             type="button"
             ref={ref}
@@ -28,7 +27,6 @@ export default function SwiperButton({
     ) : (
         <button
             ref={ref}
-            onClick={swiper ? () => swiper.slideNext() : onClick}
             title="swiper-btn"
             type="button"
             className={
