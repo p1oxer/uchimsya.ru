@@ -4,7 +4,6 @@ import "swiper/css";
 import StoriesItem from "./StoriesItem";
 import { Navigation } from "swiper/modules";
 import SwiperButton from "../UI/SwiperButton";
-import { loadImages } from "../../helpers";
 
 export default function Stories() {
     const swiperRef = useRef();
@@ -12,13 +11,13 @@ export default function Stories() {
     const swiperButtonNext = useRef(null);
     const [imagePaths, setImagePaths] = useState([]);
 
-    useEffect(() => {
-        const images = import.meta.glob(
-            "../../assets/images/stories/*.{png,jpg,jpeg,svg}"
-        );
+    // useEffect(() => {
+    //     const images = import.meta.glob(
+    //         "../../assets/images/stories/*.{png,jpg,jpeg,svg}"
+    //     );
 
-        loadImages(images).then(setImagePaths);
-    }, []);
+    //     loadImages(images).then(setImagePaths);
+    // }, []);
 
     const successStories = [
         {

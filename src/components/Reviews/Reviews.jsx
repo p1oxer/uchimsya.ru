@@ -5,7 +5,9 @@ import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
 import SwiperButton from "../UI/SwiperButton";
 import { Navigation } from "swiper/modules";
+import useImageLoader from "../../hooks/useImageLoader";
 export default function reviews() {
+    const imagePaths = useImageLoader("../../assets/images/reviews/*.{png,jpg,jpeg,svg}");
     const swiperRef = useRef();
     const swiperButtonPrev = useRef(null);
     const swiperButtonNext = useRef(null);

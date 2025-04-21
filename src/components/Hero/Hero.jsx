@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Autoplay, EffectFade, Pagination } from "swiper/modules";
 import "swiper/css";
@@ -6,19 +6,10 @@ import "swiper/css/effect-fade";
 import "swiper/css/pagination";
 import { FaArrowRightLong } from "react-icons/fa6";
 import HeroItem from "./HeroItem";
-import { loadImages } from "../../helpers";
+import useImageLoader from "../../hooks/useImageLoader";
 
 const Hero = () => {
-    const [imagePaths, setImagePaths] = useState([]);
-
-    useEffect(() => {
-        const heroImages = import.meta.glob(
-            "../../assets/images/hero/*.{png,jpg,jpeg,svg}"
-        );
-
-        loadImages(heroImages).then(setImagePaths);
-        
-    }, []);
+    const imagePaths = useImageLoader("hero");
     return (
         <section className="hero">
             <div className="container">

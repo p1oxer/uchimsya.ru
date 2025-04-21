@@ -1,11 +1,12 @@
-export const loadImages = async (imagePaths) => {
-
-    const filteredImagePaths = Object.keys(imagePaths).filter((key) => {
-        const filename = key.split("/").pop(); // Получаем только имя файла
-        return /^[0-9]{2}\.(jpg|jpeg|png|svg)$/.test(filename);
+export const mapCoursesWithImages = (courses, imagePaths) => {
+    return courses.map((course) => {
+        const imagePath = imagePaths.find((path) => {
+            const imageName = path.split("/").pop().split(".")[0]; // Получаем имя файла без расширения
+            return imageName === course.img; // Сравниваем с img
+        });
+        return {
+            ...course,
+            img: imagePath || "", // Если изображение не найдено, присваиваем пустую строку
+        };
     });
-    const promises = filteredImagePaths.map((key) => imagePaths[key]());
-    const resolvedImages = await Promise.all(promises);
-
-    return resolvedImages.map((img) => img.default); // Получаем URL изображений
 };
