@@ -2,13 +2,11 @@ import React from "react";
 import CourseCard from "./CourseCard";
 import ButtonMain from "../UI/ButtonMain";
 import BackgroundImage from "../UI/BackgroundImage";
-import useImageLoader from "../../hooks/useImageLoader";
+import { useImageLoader } from "../../hooks/useImageLoader";
 import { mapCoursesWithImages } from "../../helpers";
 
 export default function PopularCourses() {
-    const imagePaths = useImageLoader(
-        "../../assets/images/popularCourses/*.{png,jpg,jpeg,svg}"
-    );
+    const imagePaths = useImageLoader("popularCourses");
 
     const popularCourses = [
         {
@@ -33,7 +31,7 @@ export default function PopularCourses() {
                 "Изучите базовые правила грамматики, пополните словарный запас и научитесь уверенно общаться на английском.",
         },
         {
-            img: "web-design",
+            img: "webDesign",
             title: "Веб-дизайн с нуля",
             duration: "2 месяца",
             description:
@@ -47,7 +45,7 @@ export default function PopularCourses() {
                 "Получите основы управления личными финансами, инвестиций и планирования бюджета.",
         },
         {
-            img: "graphic-design",
+            img: "graphicDesign",
             title: "Основы графического дизайна",
             duration: "3 месяца",
             description:

@@ -4,21 +4,11 @@ import "swiper/css";
 import StoriesItem from "./StoriesItem";
 import { Navigation } from "swiper/modules";
 import SwiperButton from "../UI/SwiperButton";
+import { useImageLoader } from "../../hooks/useImageLoader";
+import { mapCoursesWithImages } from "../../helpers";
 
 export default function Stories() {
-    const swiperRef = useRef();
-    const swiperButtonPrev = useRef(null);
-    const swiperButtonNext = useRef(null);
-    const [imagePaths, setImagePaths] = useState([]);
-
-    // useEffect(() => {
-    //     const images = import.meta.glob(
-    //         "../../assets/images/stories/*.{png,jpg,jpeg,svg}"
-    //     );
-
-    //     loadImages(images).then(setImagePaths);
-    // }, []);
-
+    const imagePaths = useImageLoader("stories");
     const successStories = [
         {
             name: "Анна Петрова",
@@ -53,6 +43,11 @@ export default function Stories() {
             img: "04",
         },
     ];
+    const storiesWithImages = mapCoursesWithImages(successStories, imagePaths);
+
+    const swiperRef = useRef();
+    const swiperButtonPrev = useRef(null);
+    const swiperButtonNext = useRef(null);
 
     return (
         <section className="stories section">
@@ -75,15 +70,9 @@ export default function Stories() {
                         swiperRef.current = swiper;
                     }}
                 >
-                    {successStories.map((item, index) => (
+                    {storiesWithImages.map((item, index) => (
                         <SwiperSlide key={index}>
-                            <StoriesItem
-                                item={item}
-                                imagePath={imagePaths.find((path) => {
-                                    const imageName = path.split("/").pop(); // Получаем имя файла
-                                    return imageName === `${item.img}.jpg`; // Сравниваем с полным именем
-                                })}
-                            />
+                            <StoriesItem item={item} />
                         </SwiperSlide>
                     ))}
                 </Swiper>

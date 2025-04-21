@@ -5,25 +5,11 @@ import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
 import SwiperButton from "../UI/SwiperButton";
 import { Navigation } from "swiper/modules";
-import useImageLoader from "../../hooks/useImageLoader";
-export default function reviews() {
-    const imagePaths = useImageLoader("../../assets/images/reviews/*.{png,jpg,jpeg,svg}");
-    const swiperRef = useRef();
-    const swiperButtonPrev = useRef(null);
-    const swiperButtonNext = useRef(null);
+import { useImageLoader } from "../../hooks/useImageLoader";
+import { mapCoursesWithImages } from "../../helpers";
+export default function Reviews() {
+    const imagePaths = useImageLoader("reviews");
 
-    function handleButtonDisabling(swiper) {
-        if (swiper.isBeginning) {
-            swiperButtonPrev.current?.classList.add("swiper-btn-disabled");
-        } else {
-            swiperButtonPrev.current?.classList.remove("swiper-btn-disabled");
-        }
-        if (swiper.isEnd) {
-            swiperButtonNext.current?.classList.add("swiper-btn-disabled");
-        } else {
-            swiperButtonNext.current?.classList.remove("swiper-btn-disabled");
-        }
-    }
     const reviews = [
         {
             text: "Начав заниматься на Учимся.ру полгода назад, я заметно расширила свой кругозор и профессиональные навыки. Особенно ценно то, что курсы разработаны с учетом разных уровней подготовки - от новичка до продвинутого уровня. Отдельное спасибо за активное сообщество: обсуждения в комментариях часто помогают разобраться со сложными темами быстрее, чем это сделал бы преподаватель.",
@@ -64,6 +50,25 @@ export default function reviews() {
             img: "3",
         },
     ];
+
+    const reviewsWithImages = mapCoursesWithImages(reviews, imagePaths);
+
+    function handleButtonDisabling(swiper) {
+        if (swiper.isBeginning) {
+            swiperButtonPrev.current?.classList.add("swiper-btn-disabled");
+        } else {
+            swiperButtonPrev.current?.classList.remove("swiper-btn-disabled");
+        }
+        if (swiper.isEnd) {
+            swiperButtonNext.current?.classList.add("swiper-btn-disabled");
+        } else {
+            swiperButtonNext.current?.classList.remove("swiper-btn-disabled");
+        }
+    }
+    const swiperRef = useRef();
+    const swiperButtonPrev = useRef(null);
+    const swiperButtonNext = useRef(null);
+    // console.log(reviewsWithImages);
     return (
         <section className="reviews section">
             <BackgroundImage second isAnimated={true} />
@@ -107,7 +112,7 @@ export default function reviews() {
                         handleButtonDisabling(swiper);
                     }}
                 >
-                    {reviews.map((review, index) => {
+                    {reviewsWithImages.map((review, index) => {
                         return (
                             <SwiperSlide
                                 className="body-reviews__swiper-slide"

@@ -6,7 +6,7 @@ import "swiper/css/effect-fade";
 import "swiper/css/pagination";
 import { FaArrowRightLong } from "react-icons/fa6";
 import HeroItem from "./HeroItem";
-import useImageLoader from "../../hooks/useImageLoader";
+import { useImageLoader } from "../../hooks/useImageLoader";
 
 const Hero = () => {
     const imagePaths = useImageLoader("hero");

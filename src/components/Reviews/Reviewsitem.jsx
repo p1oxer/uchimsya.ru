@@ -1,4 +1,5 @@
 import React from "react";
+import Image from "../UI/Image";
 
 export default function Reviewsitem({ text, occupation, name, img }) {
     return (
@@ -7,7 +8,7 @@ export default function Reviewsitem({ text, occupation, name, img }) {
                 <div className="item-reviews__text text">{text}</div>
                 <div className="item-reviews__person">
                     <div className="item-reviews__img">
-                        <img src={`./img/reviews/${img}.jpg`} alt="" />
+                        <Image alt={name} imagePath={img} />
                     </div>
                     <div className="item-reviews__info">
                         <p className="item-reviews__name heading-small">{name}</p>

@@ -1,7 +1,6 @@
 import React from "react";
 
-export default function Image({ imagePath, alt }) {
-    // console.log("Исходный путь изображения:", imagePath);
+export default function StoriesImg({ imagePath, alt }) {
     const imageFormat = `.${imagePath.split(".").pop()}`;
     // console.log(imageFormat);
     // Проверяем, что imagePath не пустой
@@ -12,18 +11,17 @@ export default function Image({ imagePath, alt }) {
     const webp1920 = imagePath.replace(imageFormat, "-1920.webp");
     const webp1200 = imagePath.replace(imageFormat, "-1200.webp");
     const webp900 = imagePath.replace(imageFormat, "-900.webp");
-    const webp500 = imagePath.replace(imageFormat, "-500.webp");
+    const webp500 = imagePath.replace(imageFormat, "-small-500.webp");
 
     const avif1920 = imagePath.replace(imageFormat, "-1920.avif");
     const avif1200 = imagePath.replace(imageFormat, "-1200.avif");
     const avif900 = imagePath.replace(imageFormat, "-900.avif");
-    const avif500 = imagePath.replace(imageFormat, "-500.avif");
+    const avif500 = imagePath.replace(imageFormat, "s-mall-500.avif");
 
     const source1920 = imagePath.replace(imageFormat, `-1920${imageFormat}`);
     const source1200 = imagePath.replace(imageFormat, `-1200${imageFormat}`);
     const source900 = imagePath.replace(imageFormat, `-900${imageFormat}`);
-    const source500 = imagePath.replace(imageFormat, `-500${imageFormat}`);
-
+    const source500 = imagePath.replace(imageFormat, `-small-500${imageFormat}`);
 
     return (
         <picture>
@@ -36,9 +34,9 @@ export default function Image({ imagePath, alt }) {
             <source
                 type="image/webp"
                 srcSet={webp900}
-                media="(min-width: 501px) and (max-width: 900px)"
+                media="(min-width: 551px) and (max-width: 900px)"
             />
-            <source type="image/webp" srcSet={webp500} media="(max-width: 500px)" />
+            <source type="image/webp" srcSet={webp500} media="(max-width: 550px)" />
             <source type="image/avif" srcSet={avif1920} media="(min-width: 1201px)" />
             <source
                 type="image/avif"
@@ -48,9 +46,9 @@ export default function Image({ imagePath, alt }) {
             <source
                 type="image/avif"
                 srcSet={avif900}
-                media="(min-width: 501px) and (max-width: 900px)"
+                media="(min-width: 551px) and (max-width: 900px)"
             />
-            <source type="image/avif" srcSet={avif500} media="(max-width: 500px)" />
+            <source type="image/avif" srcSet={avif500} media="(max-width: 550px)" />
             <source type="image/jpg" srcSet={source1920} media="(min-width: 1201px)" />
             <source
                 type="image/jpg"
@@ -60,9 +58,9 @@ export default function Image({ imagePath, alt }) {
             <source
                 type="image/jpg"
                 srcSet={source900}
-                media="(min-width: 501px) and (max-width: 900px)"
+                media="(min-width: 551px) and (max-width: 900px)"
             />
-            <source type="image/jpg" srcSet={source500} media="(max-width: 500px)" />
+            <source type="image/jpg" srcSet={source500} media="(max-width: 550px)" />
             <img loading="lazy" src={imagePath} alt={alt} />
         </picture>
     );

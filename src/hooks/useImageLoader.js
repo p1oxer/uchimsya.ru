@@ -13,7 +13,7 @@ const loadImages = async (imagePaths) => {
     return resolvedImages.map((img) => img.default); // Получаем URL изображений
 };
 
-const useImageLoader = (imageFolderUrl) => {
+export const useImageLoader = (imageFolderUrl) => {
     const [imagePaths, setImagePaths] = useState([]);
 
     useEffect(() => {
@@ -29,6 +29,9 @@ const useImageLoader = (imageFolderUrl) => {
             case "popularCourses":
                 images = import.meta.glob("/src/assets/images/popularCourses/*.{png,jpg,jpeg,svg}");
                 break;
+            case "stories":
+                images = import.meta.glob("/src/assets/images/stories/*.{png,jpg,jpeg,svg}");
+                break;
             default:
                 images = {}; // Если не найдено, присваиваем пустой объект
                 break;
@@ -42,4 +45,3 @@ const useImageLoader = (imageFolderUrl) => {
     return imagePaths;
 };
 
-export default useImageLoader;

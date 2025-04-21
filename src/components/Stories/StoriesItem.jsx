@@ -1,26 +1,14 @@
 import React, { useState } from "react";
 import { BsArrowRight } from "react-icons/bs";
 import { IoIosInformationCircleOutline } from "react-icons/io";
+import StoriesImg from "./StoriesImg";
 
-export default function StoriesItem({ item, imagePath }) {
+export default function StoriesItem({ item }) {
     const [modalVisible, setModalVisible] = useState(false);
     return (
         <div className="story">
             <div className="body-story__img">
-                <picture>
-                    {imagePath ? (
-                        <>
-                            <source srcSet={imagePath} media="(min-width: 551px)" />
-                            <source
-                                srcSet={imagePath.replace(".jpg", "-small.jpg")}
-                                media="(max-width: 550px)"
-                            />
-                            <img src={imagePath} alt={item.name} />
-                        </>
-                    ) : (
-                        <img src="/path/to/default-image.jpg" alt="default" />
-                    )}
-                </picture>
+                <StoriesImg imagePath={item.img} alt={item.name} />
             </div>
             <div className="story__body body-story">
                 <button
