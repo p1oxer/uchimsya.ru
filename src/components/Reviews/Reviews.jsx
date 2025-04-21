@@ -53,18 +53,6 @@ export default function Reviews() {
 
     const reviewsWithImages = mapCoursesWithImages(reviews, imagePaths);
 
-    function handleButtonDisabling(swiper) {
-        if (swiper.isBeginning) {
-            swiperButtonPrev.current?.classList.add("swiper-btn-disabled");
-        } else {
-            swiperButtonPrev.current?.classList.remove("swiper-btn-disabled");
-        }
-        if (swiper.isEnd) {
-            swiperButtonNext.current?.classList.add("swiper-btn-disabled");
-        } else {
-            swiperButtonNext.current?.classList.remove("swiper-btn-disabled");
-        }
-    }
     const swiperRef = useRef();
     const swiperButtonPrev = useRef(null);
     const swiperButtonNext = useRef(null);
@@ -106,10 +94,8 @@ export default function Reviews() {
                     onReachEnd={() => {
                         swiperButtonNext.current?.classList.add("swiper-btn-disabled");
                     }}
-                    onSlideChange={(swiper) => handleButtonDisabling(swiper)}
                     onSwiper={(swiper) => {
                         swiperRef.current = swiper;
-                        handleButtonDisabling(swiper);
                     }}
                 >
                     {reviewsWithImages.map((review, index) => {
