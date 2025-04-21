@@ -4,6 +4,7 @@ import "swiper/css";
 import StoriesItem from "./StoriesItem";
 import { Navigation } from "swiper/modules";
 import SwiperButton from "../UI/SwiperButton";
+import { loadImages } from "../../helpers";
 
 export default function Stories() {
     const swiperRef = useRef();
@@ -12,15 +13,11 @@ export default function Stories() {
     const [imagePaths, setImagePaths] = useState([]);
 
     useEffect(() => {
-        const heroImages = import.meta.glob("../../assets/img/hero/*.{png,jpg,jpeg,svg}");
+        const images = import.meta.glob(
+            "../../assets/images/stories/*.{png,jpg,jpeg,svg}"
+        );
 
-        // Получаем массив функций, возвращаемых `import.meta.glob`
-        const imagePromises = Object.keys(heroImages).map((key) => heroImages[key]());
-
-        // Используем Promise.all для получения всех путей к изображениям
-        Promise.all(imagePromises).then((resolvedPaths) => {
-            setImagePaths(resolvedPaths.map((img) => img.default)); // Получаем URL изображений
-        });
+        loadImages(images).then(setImagePaths);
     }, []);
 
     const successStories = [
@@ -29,32 +26,32 @@ export default function Stories() {
             oldProfession: "Бухгалтер",
             newProfession: "Frontend-разработчик",
             courseName: "Основы веб-разработки: HTML, CSS, JavaScript",
-            story: "Раньше я работала бухгалтером и каждый день чувствовала, что это не моё. Хотелось творить и создавать что-то новое...",
-            imgIndex: 0, // Индекс изображения
+            story: "Раньше я работала бухгалтером и каждый день чувствовала, что это не моё. Хотелось творить и создавать что-то новое. Когда я узнала о курсах по программированию, решила попробовать. Сначала было сложно, но я не сдавалась. Сейчас работаю frontend-разработчиком и счастлива, что нашла дело, которое приносит радость",
+            img: "01",
         },
         {
             name: "Дмитрий Иванов",
             oldProfession: "Менеджер по продажам",
             newProfession: "Data Scientist",
             courseName: "Анализ данных с Python: от новичка до профессионала",
-            story: "Я всегда любил математику и аналитику, но моя работа в продажах не давала возможности развиваться...",
-            imgIndex: 1, // Индекс изображения
+            story: "Я всегда любил математику и аналитику, но моя работа в продажах не давала возможности развиваться в этом направлении. Пройдя курс по анализу данных, я открыл для себя новый мир. Теперь я data scientist в крупной компании и каждый день решаю интересные задачи",
+            img: "02",
         },
         {
             name: "Екатерина Смирнова",
             oldProfession: "Домохозяйка",
             newProfession: "Учитель английского языка",
             courseName: "Говорите уверенно: курс английского языка для начинающих",
-            story: "После рождения ребенка я долгое время была дома и чувствовала, что теряю связь с внешним миром...",
-            imgIndex: 2, // Индекс изображения
+            story: "После рождения ребенка я долгое время была дома и чувствовала, что теряю связь с внешним миром. Решила начать учить английский язык, чтобы не только самой стать увереннее, но и помочь детям с их учебой. Курсы помогли мне выучить язык и даже начать преподавать его. Теперь я учу других и получаю огромное удовольствие от этого",
+            img: "03",
         },
         {
             name: "Алексей Кузнецов",
             oldProfession: "Офисный работник",
             newProfession: "Профессиональный фотограф",
             courseName: "Искусство фотографии: от любителя до профессионала",
-            story: "Всегда увлекался фотографией, но считал это просто хобби...",
-            imgIndex: 3, // Индекс изображения
+            story: "Всегда увлекался фотографией, но считал это просто хобби. После прохождения курса я понял, что могу превратить свое увлечение в профессию. Сейчас я работаю фотографом и снимаю свадьбы, портреты и рекламные кампании. Это то, о чем я всегда мечтал!",
+            img: "04",
         },
     ];
 
@@ -81,7 +78,13 @@ export default function Stories() {
                 >
                     {successStories.map((item, index) => (
                         <SwiperSlide key={index}>
-                            <StoriesItem item={item} imagePath={imagePaths[item.imgIndex]} /> {/* Передаем путь к изображению */}
+                            <StoriesItem
+                                item={item}
+                                imagePath={imagePaths.find((path) => {
+                                    const imageName = path.split("/").pop(); // Получаем имя файла
+                                    return imageName === `${item.img}.jpg`; // Сравниваем с полным именем
+                                })}
+                            />
                         </SwiperSlide>
                     ))}
                 </Swiper>

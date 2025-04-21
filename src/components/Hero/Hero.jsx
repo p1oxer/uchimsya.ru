@@ -15,9 +15,10 @@ const Hero = () => {
         const heroImages = import.meta.glob(
             "../../assets/images/hero/*.{png,jpg,jpeg,svg}"
         );
-        loadImages(heroImages).then(setImagePaths);
-    }, []);
 
+        loadImages(heroImages).then(setImagePaths);
+        
+    }, []);
     return (
         <section className="hero">
             <div className="container">

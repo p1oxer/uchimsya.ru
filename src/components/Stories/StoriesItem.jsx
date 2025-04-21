@@ -4,26 +4,21 @@ import { IoIosInformationCircleOutline } from "react-icons/io";
 
 export default function StoriesItem({ item, imagePath }) {
     const [modalVisible, setModalVisible] = useState(false);
-
     return (
         <div className="story">
             <div className="body-story__img">
                 <picture>
                     {imagePath ? (
                         <>
+                            <source srcSet={imagePath} media="(min-width: 551px)" />
                             <source
-                                srcSet={imagePath} // Используем переданный путь
-                                media="(min-width: 551px)"
-                            />
-                            <source
-                                srcSet={imagePath.replace(".jpg", "-small.jpg")} // Меняем на малое изображение
+                                srcSet={imagePath.replace(".jpg", "-small.jpg")}
                                 media="(max-width: 550px)"
                             />
-                            <img src={imagePath} alt={item.name} />{" "}
-                            {/* Используем переданный путь */}
+                            <img src={imagePath} alt={item.name} />
                         </>
                     ) : (
-                        <img src="/path/to/default-image.jpg" alt="default" /> // Путь к изображению по умолчанию
+                        <img src="/path/to/default-image.jpg" alt="default" />
                     )}
                 </picture>
             </div>
