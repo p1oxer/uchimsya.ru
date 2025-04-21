@@ -5,7 +5,7 @@ export default function CourseCard({ img, title, duration, description }) {
     return (
         <a href="#" className="course-card">
             <div className="course-card__img">
-                <Image imagePath={img} alt={title} />
+                <Image imagePath={img} alt={title} sizes={["500"]} />
             </div>
             <div className="course-card__body">
                 <div className="course-card__title heading-small">{title}</div>

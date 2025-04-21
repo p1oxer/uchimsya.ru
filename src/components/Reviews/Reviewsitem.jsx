@@ -8,7 +8,11 @@ export default function Reviewsitem({ text, occupation, name, img }) {
                 <div className="item-reviews__text text">{text}</div>
                 <div className="item-reviews__person">
                     <div className="item-reviews__img">
-                        <Image alt={name} imagePath={img} />
+                        <Image
+                            alt={name}
+                            imagePath={img}
+                            sizes={["500"]}
+                        />
                     </div>
                     <div className="item-reviews__info">
                         <p className="item-reviews__name heading-small">{name}</p>

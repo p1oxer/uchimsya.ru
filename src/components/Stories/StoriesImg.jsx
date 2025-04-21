@@ -16,7 +16,7 @@ export default function StoriesImg({ imagePath, alt }) {
     const avif1920 = imagePath.replace(imageFormat, "-1920.avif");
     const avif1200 = imagePath.replace(imageFormat, "-1200.avif");
     const avif900 = imagePath.replace(imageFormat, "-900.avif");
-    const avif500 = imagePath.replace(imageFormat, "s-mall-500.avif");
+    const avif500 = imagePath.replace(imageFormat, "-small-500.avif");
 
     const source1920 = imagePath.replace(imageFormat, `-1920${imageFormat}`);
     const source1200 = imagePath.replace(imageFormat, `-1200${imageFormat}`);
@@ -25,11 +25,10 @@ export default function StoriesImg({ imagePath, alt }) {
 
     return (
         <picture>
-            <source type="image/webp" srcSet={webp1920} media="(min-width: 1201px)" />
             <source
                 type="image/webp"
                 srcSet={webp1200}
-                media="(min-width: 901px) and (max-width: 1200px)"
+                media="(min-width: 901px)"
             />
             <source
                 type="image/webp"
@@ -37,11 +36,10 @@ export default function StoriesImg({ imagePath, alt }) {
                 media="(min-width: 551px) and (max-width: 900px)"
             />
             <source type="image/webp" srcSet={webp500} media="(max-width: 550px)" />
-            <source type="image/avif" srcSet={avif1920} media="(min-width: 1201px)" />
             <source
                 type="image/avif"
                 srcSet={avif1200}
-                media="(min-width: 901px) and (max-width: 1200px)"
+                media="(min-width: 901px)"
             />
             <source
                 type="image/avif"
@@ -49,11 +47,10 @@ export default function StoriesImg({ imagePath, alt }) {
                 media="(min-width: 551px) and (max-width: 900px)"
             />
             <source type="image/avif" srcSet={avif500} media="(max-width: 550px)" />
-            <source type="image/jpg" srcSet={source1920} media="(min-width: 1201px)" />
             <source
                 type="image/jpg"
                 srcSet={source1200}
-                media="(min-width: 901px) and (max-width: 1200px)"
+                media="(min-width: 901px)"
             />
             <source
                 type="image/jpg"
