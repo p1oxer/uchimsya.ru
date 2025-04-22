@@ -1,47 +1,25 @@
 import { useState, useEffect } from 'react';
 
-// Функция для загрузки изображений
-const loadImages = async (imagePaths) => {
-    const filteredImagePaths = Object.keys(imagePaths).filter((key) => {
-        const filename = key.split("/").pop(); // Получаем только имя файла
-        return /^[a-zA-Z0-9]+\.(jpg|jpeg|png|svg)$/.test(filename); // Обновленное регулярное выражение
-    });
-
-    const promises = filteredImagePaths.map((key) => imagePaths[key]());
-    const resolvedImages = await Promise.all(promises);
-
-    return resolvedImages.map((img) => img.default); // Получаем URL изображений
-};
-
-export const useImageLoader = (imageFolderUrl) => {
-    const [imagePaths, setImagePaths] = useState([]);
+export const useImageLoader = (imageFolder) => {
+    const [images, setImages] = useState([]);
 
     useEffect(() => {
-        let images;
+        const fetchImageList = async () => {
+            try {
+                const response = await fetch(`/assets/images/${imageFolder}/images.json`);
+                if (!response.ok)
+                    throw new Error("Не удалось загрузить список изображений");
 
-        switch (imageFolderUrl) {
-            case "reviews":
-                images = import.meta.glob("/src/assets/images/reviews/*.{png,jpg,jpeg,svg}");
-                break; // Добавляем break для предотвращения "проваливания"
-            case "hero":
-                images = import.meta.glob("/src/assets/images/hero/*.{png,jpg,jpeg,svg}");
-                break;
-            case "popularCourses":
-                images = import.meta.glob("/src/assets/images/popularCourses/*.{png,jpg,jpeg,svg}");
-                break;
-            case "stories":
-                images = import.meta.glob("/src/assets/images/stories/*.{png,jpg,jpeg,svg}");
-                break;
-            default:
-                images = {}; // Если не найдено, присваиваем пустой объект
-                break;
-        }
+                const filenames = await response.json(); // ["hero1", "hero2", ...]
+                setImages(filenames);
+            } catch (error) {
+                console.error("Ошибка загрузки изображений:", error);
+                setImages([]);
+            }
+        };
 
-        if (images) {
-            loadImages(images).then(setImagePaths);
-        }
-    }, [imageFolderUrl]); // Зависимость от imageFolderUrl
+        fetchImageList();
+    }, [imageFolder]);
 
-    return imagePaths;
+    return images; // ["hero1", "hero2", ...]
 };
-

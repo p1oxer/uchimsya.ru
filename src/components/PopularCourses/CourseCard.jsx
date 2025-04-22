@@ -2,10 +2,12 @@ import React from "react";
 import Image from "../UI/Image";
 
 export default function CourseCard({ img, title, duration, description }) {
+    const basePath = `/assets/images/popularCourses/${img}.jpg`;
+
     return (
         <a href="#" className="course-card">
             <div className="course-card__img">
-                <Image imagePath={img} alt={title} sizes={["500"]} />
+                <Image imagePath={basePath} alt={title} sizes={["500"]} />
             </div>
             <div className="course-card__body">
                 <div className="course-card__title heading-small">{title}</div>

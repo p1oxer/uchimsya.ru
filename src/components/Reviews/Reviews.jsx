@@ -6,7 +6,6 @@ import "swiper/css";
 import SwiperButton from "../UI/SwiperButton";
 import { Navigation } from "swiper/modules";
 import { useImageLoader } from "../../hooks/useImageLoader";
-import { mapCoursesWithImages } from "../../helpers";
 export default function Reviews() {
     const imagePaths = useImageLoader("reviews");
 
@@ -51,12 +50,10 @@ export default function Reviews() {
         },
     ];
 
-    const reviewsWithImages = mapCoursesWithImages(reviews, imagePaths);
 
     const swiperRef = useRef();
     const swiperButtonPrev = useRef(null);
     const swiperButtonNext = useRef(null);
-    // console.log(reviewsWithImages);
     return (
         <section className="reviews section">
             <BackgroundImage second isAnimated={true} />
@@ -98,7 +95,7 @@ export default function Reviews() {
                         swiperRef.current = swiper;
                     }}
                 >
-                    {reviewsWithImages.map((review, index) => {
+                    {reviews.map((review, index) => {
                         return (
                             <SwiperSlide
                                 className="body-reviews__swiper-slide"

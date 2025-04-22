@@ -5,7 +5,6 @@ import StoriesItem from "./StoriesItem";
 import { Navigation } from "swiper/modules";
 import SwiperButton from "../UI/SwiperButton";
 import { useImageLoader } from "../../hooks/useImageLoader";
-import { mapCoursesWithImages } from "../../helpers";
 
 export default function Stories() {
     const imagePaths = useImageLoader("stories");
@@ -43,7 +42,6 @@ export default function Stories() {
             img: "04",
         },
     ];
-    const storiesWithImages = mapCoursesWithImages(successStories, imagePaths);
 
     const swiperRef = useRef();
     const swiperButtonPrev = useRef(null);
@@ -70,7 +68,7 @@ export default function Stories() {
                         swiperRef.current = swiper;
                     }}
                 >
-                    {storiesWithImages.map((item, index) => (
+                    {successStories.map((item, index) => (
                         <SwiperSlide key={index}>
                             <StoriesItem item={item} />
                         </SwiperSlide>

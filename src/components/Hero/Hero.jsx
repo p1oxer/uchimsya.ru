@@ -9,7 +9,7 @@ import HeroItem from "./HeroItem";
 import { useImageLoader } from "../../hooks/useImageLoader";
 
 const Hero = () => {
-    const imagePaths = useImageLoader("hero");
+    const imageNames = useImageLoader("hero");
     return (
         <section className="hero">
             <div className="container">
@@ -40,9 +40,9 @@ const Hero = () => {
                     clickable: true,
                 }}
             >
-                {imagePaths.map((path, index) => (
+                {imageNames.map((name, index) => (
                     <SwiperSlide key={index}>
-                        <HeroItem path={path} index={index} />
+                        <HeroItem baseName={name} folder="hero" />
                     </SwiperSlide>
                 ))}
             </Swiper>

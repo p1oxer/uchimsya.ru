@@ -8,7 +8,10 @@ export default function StoriesItem({ item }) {
     return (
         <div className="story">
             <div className="body-story__img">
-                <StoriesImg imagePath={item.img} alt={item.name} />
+                <StoriesImg
+                    imagePath={`/assets/images/stories/${item.img}.jpg`}
+                    alt={item.name}
+                />
             </div>
             <div className="story__body body-story">
                 <button

@@ -3,11 +3,9 @@ import CourseCard from "./CourseCard";
 import ButtonMain from "../UI/ButtonMain";
 import BackgroundImage from "../UI/BackgroundImage";
 import { useImageLoader } from "../../hooks/useImageLoader";
-import { mapCoursesWithImages } from "../../helpers";
 
 export default function PopularCourses() {
     const imagePaths = useImageLoader("popularCourses");
-
     const popularCourses = [
         {
             img: "python",
@@ -53,15 +51,13 @@ export default function PopularCourses() {
         },
     ];
 
-    const coursesWithImages = mapCoursesWithImages(popularCourses, imagePaths);
-
     return (
         <section className="popular-courses section">
             <BackgroundImage third isAnimated={true} />
             <div className="container">
                 <div className="popular-courses__title block-title">Популярные курсы</div>
                 <div className="popular-courses__body body-popular-courses">
-                    {coursesWithImages.map(
+                    {popularCourses.map(
                         (course, index) =>
                             course.img ? ( // Проверяем, есть ли путь к изображению
                                 <CourseCard

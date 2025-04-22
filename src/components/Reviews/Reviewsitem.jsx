@@ -10,7 +10,7 @@ export default function Reviewsitem({ text, occupation, name, img }) {
                     <div className="item-reviews__img">
                         <Image
                             alt={name}
-                            imagePath={img}
+                            imagePath={`/assets/images/reviews/${img}.jpg`}
                             sizes={["500"]}
                         />
                     </div>
