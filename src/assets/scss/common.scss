@@ -30,7 +30,9 @@ input {
         width: 300px;
         @include adaptiveValue("font-size", 18, 16);
         padding-left: 50px;
-
+        @media (max-width:$mobileSmall){
+             width: 100%; 
+        }
     }
 }
 

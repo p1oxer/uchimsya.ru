@@ -1,8 +1,9 @@
-import React from "react";
+import React, { useState } from "react";
 import Input from "../UI/Input";
 import CoursesList from "../Courses/CoursesList";
 
 export default function CoursesPage() {
+    const [searchQuery, setSearchQuery] = useState("");
     return (
         <div className="courses-page">
             <div className="container">
@@ -13,9 +14,13 @@ export default function CoursesPage() {
                     name=""
                     id=""
                     className="search"
-                    search
+                    value={searchQuery}
+                    onChange={(e) => setSearchQuery(e.target.value)}
                 />
-                <CoursesList />
+                <div className="courses-page__body">
+                    <aside className="courses-filters"></aside>
+                    <CoursesList searchQuery={searchQuery} />
+                </div>
             </div>
         </div>
     );

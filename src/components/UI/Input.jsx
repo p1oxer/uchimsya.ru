@@ -1,11 +1,11 @@
 import React from "react";
 import { IoSearchOutline } from "react-icons/io5";
-export default function Input(params) {
+export default function Input({ ...params }) {
     return (
         <div className="input-box">
-            {params.search ? (
+            {/* {isSearch ? (
                 <IoSearchOutline className="icon-search" size={20} color="#6e6e6e" />
-            ) : null}
+            ) : null} */}
             <input {...params} />
         </div>
     );
