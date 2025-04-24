@@ -4,6 +4,7 @@ import "./assets/scss/style.scss";
 import Home from "./components/pages/Home.jsx";
 import Layout from "./components/Layout.jsx";
 import CoursesPage from "./components/pages/CoursesPage.jsx";
+import CoursePage from "./components/pages/CoursePage.jsx";
 const router = createBrowserRouter([
     {
         path: "/",
@@ -17,6 +18,10 @@ const router = createBrowserRouter([
             {
                 path: "/courses",
                 element: <CoursesPage />,
+            },
+            {
+                path: "/courses/:courseName",
+                element: <CoursePage />,
             },
         ],
     },

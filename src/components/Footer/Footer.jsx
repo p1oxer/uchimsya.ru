@@ -60,7 +60,7 @@ export default function Footer() {
                         <p className="text">Перезвоним в течение 5 минут</p>
                         <Input type="tel" placeholder="Номер телефона*" required={true} />
                         <Input type="text" placeholder="Ваше имя" required={false} />
-                        <button type="button" className="button-main">
+                        <button type="button" className="button-main button-main-mini">
                             Отправить
                         </button>
                     </form>

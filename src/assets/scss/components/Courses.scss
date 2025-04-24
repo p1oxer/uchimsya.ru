@@ -1,3 +1,5 @@
+// course-card on the main page
+
 .course-card {
     border-radius: 30px;
     height: auto;
@@ -93,8 +95,7 @@
 
 .popular-courses {
     .section-bg {
-        svg {
-        }
+        svg {}
     }
 
     // .popular-courses__title
@@ -117,5 +118,99 @@
 
     &__button {
         margin: 0px auto;
+    }
+}
+
+.courses-page {
+    @include adaptiveValue("padding-top", 100, 50);
+    @include adaptiveValue("padding-bottom", 100, 50);
+
+    &__title {
+        @include adaptiveValue("margin-bottom", 40, 20);
+
+        &::before {
+            content: '';
+            width: 0;
+        }
+    }
+}
+
+// course-card on page all courses
+.body-courses {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+    gap: 15px;
+}
+
+.card-courses {
+    background-color: #fff;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
+    border-radius: 15px;
+
+    // .card-courses__body
+    &__body {
+        padding: 20px;
+        display: flex;
+        flex-direction: column;
+        height: 100%;
+        justify-content: space-between;
+    }
+
+    // .card-courses__name
+    &__name {}
+
+    // .card-courses__description
+    &__description {
+        margin-top: 10px;
+        flex: 1 1 auto;
+        margin-bottom: 20px;
+    }
+
+    // .card-courses__bottom
+    &__bottom {
+        display: flex;
+
+        justify-content: space-between;
+    }
+
+    // .card-courses__duration
+    &__duration {
+        margin-top: auto;
+        font-weight: 500;
+        color: #6e6e6e;
+        line-height: 1.4;
+        font-size: rem(14);
+    }
+
+    // .card-courses__button
+    &__button {}
+
+    &__img {
+        flex: 1 0 auto;
+        max-width: 125px;
+
+        @media (max-width:$tablet) {
+            max-width: 100px;
+        }
+
+        img {
+            max-width: 100%;
+            width: 125px;
+            height: 125px;
+            object-fit: cover;
+            border-radius: 10px;
+
+            @media (max-width:$tablet) {
+                width: 100px;
+                height: 100px;
+            }
+        }
+    }
+
+    &__top {
+        display: flex;
+        @include adaptiveValue("gap", 30, 15);
+        @include adaptiveValue("margin-bottom", 30, 15);
+        justify-content: space-between;
     }
 }

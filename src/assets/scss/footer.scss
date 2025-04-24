@@ -75,6 +75,7 @@
             @include adaptiveValue("font-size", 24, 20);
             gap: 10px;
             font-weight: 300;
+
             &:first-child {
                 white-space: nowrap;
             }
@@ -104,6 +105,8 @@
     }
 
     &__form {
+        z-index: 2;
+
         .text {
             font-weight: 500;
             color: #6e6e6e;
@@ -112,14 +115,6 @@
             margin-bottom: 10px;
         }
 
-        z-index: 2;
-
-       
-
-        .button-main {
-            padding: 15px 30px;
-            @include adaptiveValue("font-size", 18, 16);
-        }
     }
 }
 
