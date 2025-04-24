@@ -5,6 +5,7 @@ import { FaVk } from "react-icons/fa";
 import { FaTelegram } from "react-icons/fa";
 import { FaInstagram } from "react-icons/fa6";
 import BackgroundImage from "../UI/BackgroundImage";
+import Input from "../UI/Input";
 export default function Footer() {
     const navigation = [
         { text: "Наши курсы", link: "/" },
@@ -57,8 +58,8 @@ export default function Footer() {
                     <form action="" className="body-footer__form">
                         <p className="heading-small">Остались вопросы?</p>
                         <p className="text">Перезвоним в течение 5 минут</p>
-                        <input type="tel" placeholder="Номер телефона*" required />
-                        <input type="text" placeholder="Ваше имя" />
+                        <Input type="tel" placeholder="Номер телефона*" required={true} />
+                        <Input type="text" placeholder="Ваше имя" required={false} />
                         <button type="button" className="button-main">
                             Отправить
                         </button>

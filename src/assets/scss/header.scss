@@ -11,6 +11,11 @@
 			margin-left: auto;
 		}
 	}
+
+	&.colored {
+		background-color: #fff;
+		color: $black;
+	}
 }
 
 
@@ -35,6 +40,14 @@
 			&:hover {
 				background-color: #fff;
 				color: #000;
+			}
+		}
+
+		.colored & {
+			@media (any-hover: hover) {
+				&:hover {
+					color: $green;
+				}
 			}
 		}
 	}
@@ -89,6 +102,9 @@
 			height: rem(2);
 			background-color: #fff;
 			border-radius: 5px;
+			.colored & {
+				background-color: $black;
+			}
 		}
 
 		&::before {

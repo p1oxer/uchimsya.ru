@@ -114,23 +114,7 @@
 
         z-index: 2;
 
-        input {
-            padding: 15px;
-            background-color: #f7f7f7;
-            border-radius: 5px;
-            margin-right: 10px;
-            outline: none;
-            border: 1px solid #f7f7f7;
-            transition: all 0.3s ease 0s;
-            margin-bottom: rem(10);
-
-            &:focus {
-                border: 1px solid $green;
-            }
-            @media (max-width:$mobileSmall){
-                 width: 100%; 
-            }
-        }
+       
 
         .button-main {
             padding: 15px 30px;

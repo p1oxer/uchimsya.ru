@@ -8,8 +8,8 @@ export default function Layout() {
         <>
             <div className="wrapper">
                 <ScrollRestoration />
-                <Header />
-                <main>
+                <Header modificator={"colored"} />
+                <main className="main">
                     <Outlet />
                 </main>
                 <Footer />

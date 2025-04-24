@@ -4,16 +4,16 @@
         position: absolute;
         right: 20%;
         top: 300px;
-        height: 300px;
-        width: 300px;
+        height: 500px;
+        width: 500px;
         background-color: $green;
         opacity: 0.4;
         filter: blur(100px);
         z-index: -1;
 
-        @media (max-width:$mobile) {
-            height: 150px;
-            width: 150px;
+        @media (max-width:$tablet) {
+        height: 300px;
+            width: 300px;
         }
     }
 
@@ -22,16 +22,16 @@
         position: absolute;
         left: 20%;
         bottom: 300px;
-        height: 300px;
-        width: 300px;
+        height: 500px;
+        width: 500px;
         background-color: $green;
-        opacity: 0.5;
+        opacity: 0.4;
         filter: blur(100px);
         z-index: -1;
 
-        @media (max-width:$mobile) {
-            height: 150px;
-            width: 150px;
+        @media (max-width:$tablet) {
+            height: 300px;
+            width: 300px;
         }
     }
 

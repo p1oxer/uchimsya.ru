@@ -6,16 +6,26 @@ import Steps from "../Steps/Steps";
 import Reviews from "../Reviews/Reviews";
 import Faq from "../FAQ/Faq";
 import Stories from "../Stories/Stories";
+import { ScrollRestoration } from "react-router-dom";
+import Header from "../Header/Header";
+import Footer from "../Footer/Footer";
 export default function Home() {
     return (
         <>
-            <Hero />
-            <Advantages />
-            <PopularCourses />
-            <Steps />
-            <Stories />
-            <Reviews />
-            <Faq />
+            <div className="wrapper">
+                <ScrollRestoration />
+                <Header />
+                <main>
+                    <Hero />
+                    <Advantages />
+                    <PopularCourses />
+                    <Steps />
+                    <Stories />
+                    <Reviews />
+                    <Faq />
+                </main>
+                <Footer />
+            </div>
         </>
     );
 }
