@@ -3,6 +3,8 @@ import HeaderNav from "./HeaderNav";
 import Burger from "./Burger";
 import { Link } from "react-router-dom";
 import { UserAuth } from "../../context/AuthContext";
+import { supabase } from "../../supaBaseClient";
+import { useUser } from "../../context/UserContext";
 export default function Header({ modificator }) {
     const { session } = UserAuth();
     const navigation = [
@@ -10,6 +12,8 @@ export default function Header({ modificator }) {
         { text: "О нас", link: "/" },
         { text: "Контакты", link: "/" },
     ];
+    const { user, profile, loading, logout } = useUser();
+    console.log();
     return (
         <>
             <header className={modificator ? `header ${modificator}` : "header"}>
@@ -25,7 +29,9 @@ export default function Header({ modificator }) {
                         />
                         {session ? (
                             <Link to={"/account"} className="header__button">
-                                Аккаунт
+                                {profile?.fullname
+                                    ? profile?.fullname.split(" ")[1]
+                                    : "Аккаунт"}
                             </Link>
                         ) : (
                             <Link to={"/login"} className="header__button">
