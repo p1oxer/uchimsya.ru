@@ -11,6 +11,7 @@
     "generate:images": "node generate-images-json.js"
   },
   "dependencies": {
+    "@supabase/supabase-js": "^2.49.4",
     "dompurify": "^3.2.5",
     "marked": "^15.0.10",
     "react": "19.0.0",

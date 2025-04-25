@@ -58,8 +58,14 @@ export default function Footer() {
                     <form action="" className="body-footer__form">
                         <p className="heading-small">Остались вопросы?</p>
                         <p className="text">Перезвоним в течение 5 минут</p>
-                        <Input type="tel" placeholder="Номер телефона*" required={true} />
-                        <Input type="text" placeholder="Ваше имя" required={false} />
+                        <div className="inputs">
+                            <Input
+                                type="tel"
+                                placeholder="Номер телефона*"
+                                required={true}
+                            />
+                            <Input type="text" placeholder="Ваше имя" required={false} />
+                        </div>
                         <button type="button" className="button-main button-main-mini">
                             Отправить
                         </button>

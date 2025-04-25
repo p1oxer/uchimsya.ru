@@ -2,7 +2,9 @@ import React, { useEffect } from "react";
 import HeaderNav from "./HeaderNav";
 import Burger from "./Burger";
 import { Link } from "react-router-dom";
+import { UserAuth } from "../../context/AuthContext";
 export default function Header({ modificator }) {
+    const { session } = UserAuth();
     const navigation = [
         { text: "Наши курсы", link: "/courses" },
         { text: "О нас", link: "/" },
@@ -21,9 +23,16 @@ export default function Header({ modificator }) {
                             direction={"horizontal"}
                             modificator={"header__nav"}
                         />
-                        <a className="header__button" href="#">
-                            Вход
-                        </a>
+                        {session ? (
+                            <Link to={"/account"} className="header__button">
+                                Аккаунт
+                            </Link>
+                        ) : (
+                            <Link to={"/login"} className="header__button">
+                                Вход
+                            </Link>
+                        )}
+
                         <Burger />
                     </div>
                 </div>

@@ -5,6 +5,11 @@ import Home from "./components/pages/Home.jsx";
 import Layout from "./components/Layout.jsx";
 import CoursesPage from "./components/pages/CoursesPage.jsx";
 import CoursePage from "./components/pages/CoursePage.jsx";
+import LoginPage from "./components/pages/Authentication/LoginPage.jsx";
+import RegisterPage from "./components/pages/Authentication/RegisterPage.jsx";
+import { AuthContextProvider } from "./context/AuthContext.jsx";
+import AccountPage from "./components/pages/AccountPage.jsx";
+import PrivateRoute from "./components/PrivateRoute.jsx";
 const router = createBrowserRouter([
     {
         path: "/",
@@ -20,8 +25,24 @@ const router = createBrowserRouter([
                 element: <CoursesPage />,
             },
             {
+                path: "/account",
+                element: (
+                    <PrivateRoute>
+                        <AccountPage />
+                    </PrivateRoute>
+                ),
+            },
+            {
                 path: "/courses/:courseName",
                 element: <CoursePage />,
+            },
+            {
+                path: "/login",
+                element: <LoginPage />,
+            },
+            {
+                path: "/register",
+                element: <RegisterPage />,
             },
         ],
     },
@@ -29,7 +50,9 @@ const router = createBrowserRouter([
 export default function App() {
     return (
         <>
-            <RouterProvider router={router} />
+            <AuthContextProvider>
+                <RouterProvider router={router} />
+            </AuthContextProvider>
         </>
     );
 }

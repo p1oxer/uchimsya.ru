@@ -156,12 +156,6 @@
     }
 }
 
-.courses-page__top {
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-}
-
 .courses__button-showmore {
     margin: 0px auto;
     margin-top: 30px;
@@ -249,7 +243,6 @@
 
         @media (max-width: em(600)) {
             flex-direction: column;
-            ;
             gap: 0;
         }
     }
@@ -257,8 +250,10 @@
 
 .courses-filters {
     display: flex;
-    align-items: center;
     gap: 10px;
+    flex-wrap: wrap;
+    align-items: start;
+    margin-bottom: 30px;
 }
 
 .filter-group {
@@ -266,4 +261,3 @@
     flex-direction: column;
     gap: 10px;
 }
-

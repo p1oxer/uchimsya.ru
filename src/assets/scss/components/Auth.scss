@@ -1,0 +1,61 @@
+.auth-page {
+    text-align: center;
+    @include adaptiveValue("padding-top", 100, 50);
+    @include adaptiveValue("padding-bottom", 100, 50);
+    position: relative;
+
+    .section-bg {
+        right: 0;
+        opacity: 0.5;
+    }
+
+    .auth-title {
+        margin: 0px auto;
+        @include adaptiveValue("margin-bottom", 60, 30);
+
+        &::before {
+            content: '';
+            width: 0;
+        }
+    }
+
+    form {
+        margin: 0px auto;
+        display: flex;
+        flex-direction: column;
+        gap: 15px;
+        width: 500px;
+
+        @media (max-width:$mobile) {
+            max-width: 500px;
+            width: 100%;
+        }
+
+        label {
+            text-align: left;
+            color: $green;
+            font-weight: 600;
+            font-family: "Raleway";
+            @include adaptiveValue("font-size", 24, 20);
+
+        }
+
+        input {
+            width: 100%;
+        }
+
+        p {
+            @include adaptiveValue("font-size", 18, 14);
+
+            a {
+                color: $green;
+
+                @media (any-hover: hover) {
+                    &:hover {
+                        text-decoration: underline;
+                    }
+                }
+            }
+        }
+    }
+}

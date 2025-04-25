@@ -1,11 +1,9 @@
-import React from "react";
+import React, { useState } from "react";
 export default function Input({ ...params }) {
+    const [value, setValue] = useState("");
     return (
         <div className="input-box">
-            {/* {isSearch ? (
-                <IoSearchOutline className="icon-search" size={20} color="#6e6e6e" />
-            ) : null} */}
-            <input {...params} />
+            <input value={value} onChange={(e) => setValue(e.target.value)} {...params} />
         </div>
     );
 }
