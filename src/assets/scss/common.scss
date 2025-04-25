@@ -30,9 +30,41 @@ input {
         width: 300px;
         @include adaptiveValue("font-size", 18, 16);
         padding-left: 50px;
-        @media (max-width:$mobileSmall){
-             width: 100%; 
+
+        @media (max-width:$mobileSmall) {
+            width: 100%;
         }
+    }
+}
+
+select {
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    text-indent: 1px;
+    text-overflow: '';
+    padding: 15px 30px;
+    background-color: #fff;
+    border-radius: 5px;
+    outline: none;
+    border: 1px solid #f7f7f7;
+    transition: all 0.3s ease 0s;
+    cursor: pointer;
+    @include adaptiveValue("font-size", 18, 16);
+    color: #6e6e6e;
+    margin-bottom: 10px;
+    @media (any-hover: hover) {
+        &:hover {
+            border: 1px solid #c4c4c4;
+        }
+    }
+
+    &:focus {
+        border: 1px solid $green;
+    }
+
+    @media (max-width:$mobileSmall) {
+        width: 100%;
     }
 }
 

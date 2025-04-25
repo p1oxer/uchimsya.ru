@@ -1,5 +1,4 @@
 import React from "react";
-import { IoSearchOutline } from "react-icons/io5";
 export default function Input({ ...params }) {
     return (
         <div className="input-box">
