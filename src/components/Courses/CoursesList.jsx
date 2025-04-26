@@ -62,7 +62,7 @@ export default function CoursesList({ searchQuery, selectedCategory, selectedDur
     // Загрузка при изменении фильтров
     useEffect(() => {
         fetchCourses(true);
-    }, [fetchCourses]);
+    }, [searchQuery, selectedCategory, selectedDuration]);
 
     const loadMoreCourses = () => {
         if (!loading && hasMore) {
@@ -73,6 +73,11 @@ export default function CoursesList({ searchQuery, selectedCategory, selectedDur
     return (
         <>
             <div className="courses__list">
+                {loading && (
+                    <div className="loading">
+                        <img src="./assets/images/loading.gif" alt="" />
+                    </div>
+                )}
                 <div className="courses__body body-courses">
                     {courses.length > 0 ? (
                         <>

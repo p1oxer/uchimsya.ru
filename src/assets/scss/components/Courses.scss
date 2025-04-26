@@ -166,6 +166,10 @@
     box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
     border-radius: 15px;
 
+    @media (max-width:$mobileSmall) {
+        border-radius: 5px;
+    }
+
     // .card-courses__body
     &__body {
         padding: 20px;
@@ -173,10 +177,18 @@
         flex-direction: column;
         height: 100%;
         justify-content: space-between;
+
+        @media (max-width:$mobileSmall) {
+            padding: 10px;
+        }
     }
 
     // .card-courses__name
-    &__name {}
+    &__name {
+        hyphens: auto;
+        word-break: break-word;
+        @include adaptiveValue("font-size", 24, 16);
+    }
 
     // .card-courses__description
     &__description {
@@ -207,7 +219,9 @@
     }
 
     // .card-courses__button
-    &__button {}
+    &__button {
+        @include adaptiveValue("font-size", 18, 14);
+    }
 
     &__img {
         flex: 1 0 auto;
@@ -229,8 +243,9 @@
                 height: 100px;
             }
 
-            @media (max-width:em(600)) {
-                display: none;
+            @media (max-width:em(400)) {
+                width: 75px;
+                height: 75px;
             }
         }
     }
@@ -240,11 +255,6 @@
         @include adaptiveValue("gap", 30, 15);
         @include adaptiveValue("margin-bottom", 30, 15);
         justify-content: space-between;
-
-        @media (max-width: em(600)) {
-            flex-direction: column;
-            gap: 0;
-        }
     }
 }
 
@@ -260,4 +270,20 @@
     display: flex;
     flex-direction: column;
     gap: 10px;
+}
+
+.loading {
+    position: absolute;
+    left: 50%;
+    transform: translate(-50%, 0px);
+    display: flex;
+    justify-content: center;
+    width: 100px;
+    height: 100px;
+    background-color: rgba(0, 0, 0, 0.2);
+
+    img {
+        width: 100px;
+        height: 100px;
+    }
 }

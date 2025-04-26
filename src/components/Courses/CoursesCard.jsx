@@ -9,6 +9,7 @@ export default function CoursesCard({ course }) {
                         <a
                             href={`course/${translit(course.name)}`}
                             className="card-courses__name heading-small"
+                            lang="ru"
                         >
                             {course.name}
                         </a>

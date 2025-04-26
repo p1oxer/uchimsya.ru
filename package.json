@@ -11,6 +11,7 @@
     "generate:images": "node generate-images-json.js"
   },
   "dependencies": {
+    "@react-input/mask": "^2.0.4",
     "@supabase/supabase-js": "^2.49.4",
     "dompurify": "^3.2.5",
     "dotenv": "^16.5.0",

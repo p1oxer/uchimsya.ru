@@ -29,7 +29,9 @@ export default function Header({ modificator }) {
                         />
                         {session ? (
                             <Link to={"/account"} className="header__button">
-                                {profile?.fullname
+                                {profile?.is_admin
+                                    ? "Админ"
+                                    : profile?.fullname
                                     ? profile?.fullname.split(" ")[1]
                                     : "Аккаунт"}
                             </Link>
@@ -38,7 +40,6 @@ export default function Header({ modificator }) {
                                 Вход
                             </Link>
                         )}
-
                         <Burger />
                     </div>
                 </div>

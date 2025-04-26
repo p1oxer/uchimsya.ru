@@ -7,14 +7,36 @@
 	z-index: 5;
 
 	&__button {
+		transition: all 0.2s ease 0s;
+		padding: 8px 20px;
+		border-radius: 20px;
+		cursor: pointer;
+		font-weight: 600;
+		@media (any-hover: hover) {
+			&:hover {
+				background-color: #fff;
+				color: #000;
+			}
+		}
+
+		.colored & {
+			@media (any-hover: hover) {
+				&:hover {
+					color: $green;
+				}
+			}
+		}
+
 		@media (max-width:$mobile) {
 			margin-left: auto;
+
 		}
 	}
 
 	&.colored {
 		background-color: #fff;
 		color: $black;
+
 	}
 }
 
@@ -102,6 +124,7 @@
 			height: rem(2);
 			background-color: #fff;
 			border-radius: 5px;
+
 			.colored & {
 				background-color: $black;
 			}
