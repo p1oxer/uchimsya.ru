@@ -8,7 +8,7 @@ import CoursePage from "./components/pages/CoursePage.jsx";
 import LoginPage from "./components/pages/Authentication/LoginPage.jsx";
 import RegisterPage from "./components/pages/Authentication/RegisterPage.jsx";
 import { AuthContextProvider } from "./context/AuthContext.jsx";
-import AccountPage from "./components/pages/AccountPage.jsx";
+import AccountPage from "./components/pages/AccountPage/AccountPage.jsx";
 import PrivateRoute from "./components/PrivateRoute.jsx";
 import { UserProvider } from "./context/UserContext.jsx";
 const router = createBrowserRouter([

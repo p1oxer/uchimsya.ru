@@ -3,7 +3,6 @@ import HeaderNav from "./HeaderNav";
 import Burger from "./Burger";
 import { Link } from "react-router-dom";
 import { UserAuth } from "../../context/AuthContext";
-import { supabase } from "../../supaBaseClient";
 import { useUser } from "../../context/UserContext";
 export default function Header({ modificator }) {
     const { session } = UserAuth();

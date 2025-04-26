@@ -28,6 +28,18 @@ export const AuthContextProvider = ({ children }) => {
                 console.error("Ошибка при добавлении профиля: ", profileError);
                 return { success: false, error: profileError };
             }
+
+            // Проверка, что запись создана
+            const { error: fetchError } = await supabase
+                .from("profiles")
+                .select("*")
+                .eq("id", user.id)
+                .single();
+
+            if (fetchError) {
+                console.error("Ошибка при проверке профиля: ", fetchError);
+                return { success: false, error: fetchError };
+            }
         }
 
         return { success: true, data };

@@ -1,22 +1,41 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { UserAuth } from "../../../context/AuthContext";
+import { InputMask } from "@react-input/mask";
 export default function RegisterForm() {
     const [loading, setLoading] = useState();
     const [fullname, setFullname] = useState();
     const [email, setEmail] = useState();
     const [password, setPassword] = useState();
-    const [phone, setPhone] = useState();
+    const [phone, setPhone] = useState("");
     const [error, setError] = useState();
+    const [isPhoneComplete, setIsPhoneComplete] = useState(true);
 
     const { session, registerNewUser } = UserAuth();
     const navigate = useNavigate();
+
+    // Функция для проверки полноты номера телефона
+    const checkPhoneCompleteness = (phone) => {
+        if (phone) {
+            const digitsOnly = phone.replace(/\D/g, ""); // Убираем все символы, кроме цифр
+            return digitsOnly.length === 11; // Полный номер содержит 11 цифр
+        }
+        return true;
+    };
+
+    useEffect(() => {
+        setIsPhoneComplete(checkPhoneCompleteness(phone));
+    }, [phone]);
 
     // Регистрация
     async function handleRegister(e) {
         e.preventDefault();
         setLoading(true);
         try {
+            if (!isPhoneComplete) {
+                alert("Пожалуйста, введите полный номер телефона.");
+                return;
+            }
             const result = await registerNewUser(email, password, fullname, phone);
             if (result.success) {
                 navigate("/account");
@@ -31,10 +50,13 @@ export default function RegisterForm() {
     return (
         <form onSubmit={handleRegister}>
             <label htmlFor="phone">Номер телефона</label>
-            <input
+            <InputMask
                 onChange={(e) => setPhone(e.target.value)}
-                type={"tel"}
-                placeholder={"+7 (900) 000-00-00"}
+                type="tel"
+                placeholder="Номер телефона"
+                value={phone}
+                mask="+7 (___) ___-__-__"
+                replacement={{ _: /\d/ }}
                 id={"phone"}
             />
             <label htmlFor="fullname">Фамилия Имя Отчество</label>

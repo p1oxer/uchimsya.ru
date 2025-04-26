@@ -37,7 +37,8 @@ export default function FooterForm() {
     return (
         <>
             <Modal open={open} onClose={() => setOpen(false)}>
-                Заявка успешно отправлена
+                <p className="heading-medium">Спасибо! Заявка успешно отправлена</p>
+                <p className="text">Мы перезвоним вам в ближайшее время.</p>
             </Modal>
             <form
                 onSubmit={(e) => createCallbackRequest(e, phone, name)}

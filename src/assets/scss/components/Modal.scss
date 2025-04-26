@@ -6,21 +6,25 @@
     align-items: center;
     transition: all 0.3s ease 0s;
     z-index: 7;
+
     &.visible {
         background: rgba(0, 0, 0, 0.4);
     }
+
     &.invisible {
         opacity: 0;
         visibility: hidden;
         background: none;
     }
-    &__body{
+
+    &__body {
         background: #fff;
         border-radius: 20px;
         padding: 25px;
         transition: all 0.3s ease 0s;
         position: relative;
         width: fit-content;
+        min-height: 300px;
         max-width: 90vw;
         min-width: 50vw;
         max-height: 90vh;
@@ -28,15 +32,20 @@
         display: flex;
         justify-content: center;
         align-items: center;
+        flex-direction: column;
+        text-align: center;
+
         .visible & {
             transform: scale(1);
             opacity: 1;
         }
+
         .invisible & {
             transform: scale(1.25);
             opacity: 0;
         }
     }
+
     &__close {
         position: absolute;
         top: 15px;
