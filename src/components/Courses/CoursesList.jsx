@@ -1,74 +1,97 @@
-import React, { useState, useEffect } from "react";
-import coursesData from "../../data/courses.json";
+import React, { useState, useEffect, useCallback } from "react";
 import CoursesCard from "./CoursesCard";
+import { supabase } from "../../supaBaseClient";
 
 export default function CoursesList({ searchQuery, selectedCategory, selectedDuration }) {
-    const [allCourses, setAllCourses] = useState([]);
-    const [filteredCourses, setFilteredCourses] = useState([]);
-    const [visibleCoursesCount, setVisibleCoursesCount] = useState(10);
+    const [courses, setCourses] = useState([]);
+    const [loading, setLoading] = useState(true);
+    const [hasMore, setHasMore] = useState(true);
+    const [page, setPage] = useState(0);
+    const PAGE_SIZE = 10;
 
-    // Инициализация всех курсов
-    useEffect(() => {
-        setAllCourses(coursesData);
-        setFilteredCourses(coursesData);
-    }, []);
+    // Универсальная функция построения запроса
+    const buildQuery = useCallback(() => {
+        let query = supabase.from("courses").select("*");
 
-    // Фильтрация при изменении searchQuery, selectedCategory или selectedDuration
-    useEffect(() => {
-        let filtered = allCourses;
-
-        // Поиск по имени и категории
         if (searchQuery) {
-            filtered = filtered.filter((course) => {
-                return (
-                    course.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
-                    course.category.toLowerCase().includes(searchQuery.toLowerCase())
-                );
-            });
+            query = query.or(
+                `name.ilike.%${searchQuery}%,category.ilike.%${searchQuery}%`
+            );
         }
 
-        // Фильтр по категории
-        if (selectedCategory) {
-            filtered = filtered.filter((course) => course.category === selectedCategory);
+        if (selectedCategory && selectedCategory !== "all") {
+            query = query.eq("category", selectedCategory);
         }
 
-        // Фильтр по длительности
         if (selectedDuration) {
-            filtered = filtered.filter((course) => course.duration === selectedDuration);
+            query = query.eq("duration", selectedDuration);
         }
 
-        setFilteredCourses(filtered);
-        setVisibleCoursesCount(10); // Сбрасываем количество видимых курсов при новом фильтре
-    }, [searchQuery, selectedCategory, selectedDuration, allCourses]);
+        return query;
+    }, [searchQuery, selectedCategory, selectedDuration]);
 
-    // Показать больше курсов
-    const showMoreCourses = () => {
-        setVisibleCoursesCount((prevCount) => prevCount + 10);
+    // Загрузка курсов (первая или следующая страница)
+    const fetchCourses = useCallback(
+        async (reset = false) => {
+            setLoading(true);
+            try {
+                const currentPage = reset ? 0 : page;
+                const from = currentPage * PAGE_SIZE;
+                const to = from + PAGE_SIZE - 1;
+
+                const query = buildQuery();
+                const { data, error } = await query.range(from, to);
+
+                if (error) {
+                    console.error("Ошибка при загрузке курсов:", error.message);
+                } else {
+                    setCourses((prev) => (reset ? data : [...prev, ...data]));
+                    setHasMore(data.length === PAGE_SIZE);
+                    if (reset) setPage(1);
+                    else setPage((prev) => prev + 1);
+                }
+            } catch (error) {
+                console.error("Ошибка при загрузке курсов:", error.message);
+            } finally {
+                setLoading(false);
+            }
+        },
+        [buildQuery, page]
+    );
+
+    // Загрузка при изменении фильтров
+    useEffect(() => {
+        fetchCourses(true);
+    }, [fetchCourses]);
+
+    const loadMoreCourses = () => {
+        if (!loading && hasMore) {
+            fetchCourses();
+        }
     };
 
     return (
         <>
             <div className="courses__list">
                 <div className="courses__body body-courses">
-                    {filteredCourses.length > 0 ? (
+                    {courses.length > 0 ? (
                         <>
                             {/* Отображаем только первые visibleCoursesCount курсов */}
-                            {filteredCourses
-                                .slice(0, visibleCoursesCount)
-                                .map((course) => (
-                                    <CoursesCard course={course} key={course.name} />
-                                ))}
+                            {courses.map((course) => (
+                                <CoursesCard course={course} key={course.name} />
+                            ))}
                         </>
                     ) : (
                         <p className="heading-small">Курсы не найдены!</p>
                     )}
                 </div>
-                {visibleCoursesCount < filteredCourses.length && (
+                {hasMore && (
                     <button
                         className="button-main courses__button-showmore"
-                        onClick={showMoreCourses}
+                        onClick={loadMoreCourses}
+                        disabled={loading}
                     >
-                        Показать ещё
+                        {loading ? "Загрузка..." : "Показать ещё"}
                     </button>
                 )}
             </div>

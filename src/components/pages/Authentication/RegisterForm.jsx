@@ -30,7 +30,7 @@ export default function RegisterForm() {
     }
     return (
         <form onSubmit={handleRegister}>
-            <label htmlFor="phone">Фамилия Имя Отчество</label>
+            <label htmlFor="phone">Номер телефона</label>
             <input
                 onChange={(e) => setPhone(e.target.value)}
                 type={"tel"}

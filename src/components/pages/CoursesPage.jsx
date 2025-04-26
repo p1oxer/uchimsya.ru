@@ -43,7 +43,7 @@ export default function CoursesPage() {
                             value={selectedCategory}
                             onChange={(e) => setSelectedCategory(e.target.value)}
                         >
-                            <option value="">Все категории</option>
+                            <option value="all">Все категории</option>
                             {uniqueCategories.map((category) => (
                                 <option key={category} value={category}>
                                     {category}
