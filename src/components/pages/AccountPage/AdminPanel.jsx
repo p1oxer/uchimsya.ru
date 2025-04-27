@@ -5,7 +5,6 @@ export default function AdminPanel() {
     const [requests, setRequests] = useState([]);
     const [loading, setLoading] = useState(true);
 
-
     useEffect(() => {
         const fetchCallbackRequests = async () => {
             const { data, error } = await supabase
@@ -39,12 +38,15 @@ export default function AdminPanel() {
 
     return (
         <section className="admin">
-            <p className="admin__title block-title">Админ-панель</p>
-
-            {loading && <p>Загружаем…</p>}
+            {loading && (
+                <div className="loading">
+                    <div className="loader"></div>
+                </div>
+            )}
 
             {!loading && (
                 <>
+                    <p className="admin__title block-title">Админ-панель</p>
                     <p className="heading-small">Заявки на обратный звонок</p>
                     <table className="admin__table">
                         <thead>

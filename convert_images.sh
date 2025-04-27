@@ -1,9 +1,9 @@
 #!/bin/bash
 
 # Папка с исходными изображениями
-INPUT_DIR="./public/assets/images/coursesCategories/123"
+INPUT_DIR="./public/assets/images/teacher"
 # Папка для сохранения конвертированных изображений
-OUTPUT_DIR="./public/assets/images/coursesCategories/123"
+OUTPUT_DIR="./public/assets/images/teacher"
 
 # Создаем папку для выходных изображений, если она не существует
 mkdir -p "$OUTPUT_DIR"
@@ -22,18 +22,18 @@ find "$INPUT_DIR" -type f \( -iname "*.jpg" -o -iname "*.jpeg" -o -iname "*.png"
     filename_no_ext="${filename%.*}"
 
     # Конвертация исходного изображения в размеры 1920, 1200, 900 и 500 с автоматической высотой
-    for size in 300; do
+    for size in 500; do
         # Конвертация в исходном формате
         magick "$img" -resize "${size}x" -quality 90 "$output_subdir/${filename_no_ext}-${size}.${filename##*.}"
     done
 
     # Конвертация в WebP
-    for size in 300; do
+    for size in 500; do
         magick "$img" -resize "${size}x" -quality 90 "$output_subdir/${filename_no_ext}-${size}.webp"
     done
     
     # Конвертация в AVIF
-    for size in 300; do
+    for size in 500; do
         magick "$img" -resize "${size}x" -quality 90 "$output_subdir/${filename_no_ext}-${size}.avif"
     done
 done

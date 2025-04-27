@@ -147,7 +147,7 @@
 .body-courses {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
-
+    position: relative;
     gap: 15px;
 
     @media (max-width:$mobileSmall) {
@@ -272,3 +272,225 @@
     gap: 10px;
 }
 
+
+
+.page-course {
+    @include adaptiveValue("padding-top", 100, 50);
+    @include adaptiveValue("padding-bottom", 100, 50);
+    position: relative;
+
+    // .page-course__body
+    &__body {
+        max-width: 1000px;
+        margin: 0px auto;
+    }
+
+    // .page-course__card
+    &__card {
+        background-color: #fff;
+        padding: 30px;
+        border-radius: 15px;
+        display: flex;
+        gap: 30px;
+        justify-content: space-between;
+        box-shadow: $boxShadow;
+        position: relative;
+
+        &::before {
+            content: '';
+            position: absolute;
+            right: 20%;
+            top: 0px;
+            height: 300px;
+            width: 300px;
+            background-color: $green;
+            opacity: 0.7;
+            filter: blur(100px);
+            z-index: -1;
+        }
+
+        &::after {
+            content: '';
+            position: absolute;
+            left: 20%;
+            bottom: 0px;
+            height: 300px;
+            width: 300px;
+            background-color: $green;
+            opacity: 0.5;
+            filter: blur(100px);
+            z-index: -1;
+        }
+
+        @media (max-width: em(580)) {
+            flex-direction: column;
+        }
+
+        @media (max-width:$mobileSmall) {
+            padding: 20px;
+        }
+
+        img {
+            border-radius: 30px;
+
+            @media (max-width:$mobile) {
+                width: 200px;
+            }
+
+            @media (max-width: em(580)) {
+                width: 100%;
+                max-height: 200px;
+                object-fit: cover;
+                border-radius: 15px;
+            }
+
+        }
+    }
+
+    // .page-course__inner
+    &__inner {}
+
+    // .page-course__name
+    &__name {
+        margin-bottom: 10px;
+    }
+
+    // .page-course__description
+    &__description {}
+
+    &__attributes {
+        display: flex;
+        align-items: center;
+        gap: 30px;
+        justify-content: center;
+        text-align: center;
+
+        p {
+            font-weight: 400;
+            color: #353535;
+            @include adaptiveValue("font-size", 18, 14);
+        }
+
+        svg {
+            height: 40px;
+        }
+    }
+
+    // .page-course__info
+    &__info {
+        display: flex;
+        margin-top: 30px;
+        gap: 10px;
+        flex-direction: column;
+    }
+
+    // .page-course__info--item
+    &__info--item {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 10px;
+        width: 33%;
+    }
+
+    &__bottom {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        @include adaptiveValue("gap", 30, 20);
+        @include adaptiveValue("margin-top", 30, 20);
+    }
+
+    // .page-course__price
+    &__price {
+        @include adaptiveValue("font-size", 32, 28);
+    }
+
+    // .page-course__button
+    &__button {
+        @media (max-width:$mobileSmall) {
+            min-width: auto;
+        }
+    }
+
+    // .page-course__heading
+    &__heading {
+        @include adaptiveValue("margin-top", 50, 25);
+        @include adaptiveValue("margin-bottom", 30, 15);
+    }
+
+    // .page-course__about
+    &__about {
+        @include adaptiveValue("font-size", 24, 20);
+        font-weight: 300;
+    }
+
+    // .page-course__program
+    &__program {}
+
+    // .page-course__teacher
+    &__teacher {}
+}
+
+.teacher-course {
+    width: fit-content;
+    margin: 0px auto;
+    background-color: #fff;
+    border-radius: 15px;
+    box-shadow: $boxShadow;
+
+    // .teacher-course__body
+    &__body {
+        display: flex;
+        gap: 20px;
+        padding: 30px;
+
+        @media (max-width:$mobileSmall) {
+            flex-direction: column;
+        }
+
+        @media (max-width:$mobile) {
+            padding: 30px 15px;
+        }
+    }
+
+    // .teacher-course__img
+    &__img {
+        @media (max-width:$mobileSmall) {
+            margin: 0px auto;
+            width: fit-content;
+        }
+
+        img {
+            max-width: 300px;
+            border-radius: 20px;
+
+            @media (max-width:$mobile) {
+                max-width: 150px;
+            }
+
+            @media (max-width:$mobileSmall) {
+                border-radius: 15px;
+            }
+        }
+    }
+
+    // .teacher-course__info
+    &__info {}
+
+    // .teacher-course__name
+    &__name {
+        margin-bottom: 5px;
+    }
+
+    // .teacher-course__occupation
+    &__occupation {
+        font-weight: 500;
+        color: #6e6e6e;
+        line-height: 1.4;
+        font-size: 0.875rem;
+        margin-bottom: 20px;
+    }
+
+    &__text {}
+}

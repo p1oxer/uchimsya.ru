@@ -4,7 +4,7 @@ import "./assets/scss/style.scss";
 import Home from "./components/pages/Home.jsx";
 import Layout from "./components/Layout.jsx";
 import CoursesPage from "./components/pages/CoursesPage.jsx";
-import CoursePage from "./components/pages/CoursePage.jsx";
+import CoursePage from "./components/pages/CoursePage/CoursePage.jsx";
 import LoginPage from "./components/pages/Authentication/LoginPage.jsx";
 import RegisterPage from "./components/pages/Authentication/RegisterPage.jsx";
 import { AuthContextProvider } from "./context/AuthContext.jsx";

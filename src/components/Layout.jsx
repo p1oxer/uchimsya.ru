@@ -7,7 +7,6 @@ export default function Layout() {
     return (
         <>
             <div className="wrapper">
-                <ScrollRestoration />
                 <Header modificator={"colored"} />
                 <main className="main">
                     <Outlet />

@@ -10,6 +10,7 @@ export default function HeroItem({ baseName, folder }) {
                     imagePath={basePath}
                     alt={baseName}
                     sizes={["1920", "1200", "900", "500"]}
+                    preload={true}
                 />
             </div>
         </>

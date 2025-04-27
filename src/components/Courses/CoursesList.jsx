@@ -73,8 +73,12 @@ export default function CoursesList({ searchQuery, selectedCategory, selectedDur
     return (
         <>
             <div className="courses__list">
-                {loading && <div className="loader"></div>}
                 <div className="courses__body body-courses">
+                    {loading && (
+                        <div className="loading">
+                            <div className="loader"></div>
+                        </div>
+                    )}
                     {courses.length > 0 ? (
                         <>
                             {/* Отображаем только первые visibleCoursesCount курсов */}
@@ -82,19 +86,21 @@ export default function CoursesList({ searchQuery, selectedCategory, selectedDur
                                 <CoursesCard course={course} key={course.name} />
                             ))}
                         </>
-                    ) : (
+                    ) : !loading ? (
                         <p className="heading-small">Курсы не найдены!</p>
-                    )}
+                    ) : null}
                 </div>
-                {hasMore && (
-                    <button
-                        className="button-main courses__button-showmore"
-                        onClick={loadMoreCourses}
-                        disabled={loading}
-                    >
-                        {loading ? "Загрузка..." : "Показать ещё"}
-                    </button>
-                )}
+                {!loading
+                    ? hasMore && (
+                          <button
+                              className="button-main courses__button-showmore"
+                              onClick={loadMoreCourses}
+                              disabled={loading}
+                          >
+                              {loading ? "Загрузка..." : "Показать ещё"}
+                          </button>
+                      )
+                    : null}
             </div>
         </>
     );
