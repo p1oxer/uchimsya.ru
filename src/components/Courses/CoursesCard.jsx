@@ -7,7 +7,7 @@ export default function CoursesCard({ course }) {
                 <div className="card-courses__top">
                     <div className="card-courses__info">
                         <a
-                            href={`course/${translit(course.name)}`}
+                            href={`courses/${translit(course.name)}`}
                             className="card-courses__name heading-small"
                             lang="ru"
                         >
@@ -40,13 +40,12 @@ export default function CoursesCard({ course }) {
                         />
                     </div>
                 </div>
-
                 <div className="card-courses__bottom">
                     <span className="card-courses__duration">
                         Срок обучения: {course.duration}
                     </span>
                     <a
-                        href={`course/${translit(course.name)}`}
+                        href={`courses/${translit(course.name)}`}
                         className="card-courses__button button-main button-main-mini"
                     >
                         Подробнее

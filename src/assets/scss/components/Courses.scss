@@ -272,18 +272,3 @@
     gap: 10px;
 }
 
-.loading {
-    position: absolute;
-    left: 50%;
-    transform: translate(-50%, 0px);
-    display: flex;
-    justify-content: center;
-    width: 100px;
-    height: 100px;
-    background-color: rgba(0, 0, 0, 0.2);
-
-    img {
-        width: 100px;
-        height: 100px;
-    }
-}
