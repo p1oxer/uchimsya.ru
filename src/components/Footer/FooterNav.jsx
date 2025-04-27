@@ -2,7 +2,7 @@ import React from "react";
 
 export default function FooterNav() {
     const navigation = [
-        { text: "Наши курсы", link: "/" },
+        { text: "Наши курсы", link: "/courses" },
         { text: "О нас", link: "/" },
         { text: "Контакты", link: "/" },
         { text: "Политика конфиденциальности", link: "/" },

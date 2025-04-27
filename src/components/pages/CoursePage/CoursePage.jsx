@@ -2,19 +2,22 @@ import React, { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { supabase } from "../../../supaBaseClient";
 import Loading from "../../UI/Loading";
-import CoursePageImg from "./coursePageImg";
-import { CiClock2 } from "react-icons/ci";
-import { BsBookmarkStar } from "react-icons/bs";
-import { TbCategory } from "react-icons/tb";
-import Image from "../../UI/Image";
 import BackgroundImage from "../../UI/BackgroundImage";
-import Accordion from "../../UI/Accordion";
+import { useUser } from "../../../context/UserContext";
+import Modal from "../../UI/Modal";
+import CourseTeacher from "./CourseTeacher";
+import CourseProgram from "./CourseProgram";
+import CourseCard from "./CourseCard";
 export default function CoursePage() {
+    const { user } = useUser();
     const { courseName } = useParams();
     const [course, setCourse] = useState(null);
     const [teacher, setTeacher] = useState(null);
     const [loading, setLoading] = useState(true);
+    const [isPurchased, setIsPurchased] = useState(false); // Новое состояние
     const navigate = useNavigate();
+    const [open, setOpen] = useState(false);
+
     useEffect(() => {
         async function fetchCourse() {
             const { data, error } = await supabase
@@ -32,7 +35,9 @@ export default function CoursePage() {
         }
         fetchCourse();
     }, [courseName]);
+
     useEffect(() => {
+        if (!course?.category) return;
         async function fetchTeacher() {
             const { data, error } = await supabase
                 .from("teachers")
@@ -49,96 +54,76 @@ export default function CoursePage() {
         fetchTeacher();
     }, [course]);
 
+    // Функция для проверки, купил ли пользователь курс
+    useEffect(() => {
+        async function checkIfPurchased() {
+            if (!user || !course) return;
+
+            const { data, error } = await supabase
+                .from("user_courses")
+                .select("*")
+                .eq("user_id", user.id)
+                .eq("course_id", course.id);
+
+            if (error) {
+                console.error("Ошибка при проверке покупки курса:", error);
+            } else {
+                setIsPurchased(data.length > 0); // Если запись найдена, курс уже куплен
+            }
+        }
+        checkIfPurchased();
+    }, [user, course]);
+
+    function handleClick() {
+        if (!user) {
+            alert("Вы должны войти в аккаунт, чтобы купить курс.");
+            navigate("/login");
+            return;
+        }
+
+        if (isPurchased) {
+            alert("Вы уже приобрели этот курс.");
+            return;
+        }
+
+        purchaseCourse(user.id, course.id);
+        setOpen(true);
+    }
+
+    async function purchaseCourse(userId, courseId) {
+        const { error } = await supabase
+            .from("user_courses")
+            .insert({ user_id: userId, course_id: courseId });
+
+        if (error) {
+            console.error("Произошла ошибка", error);
+            return { success: false, error };
+        }
+
+        setIsPurchased(true); // Обновляем состояние после успешной покупки
+        return { success: true };
+    }
+
     return (
         <>
             <Loading isFading={!loading} />
             <section className="page-course">
+                <Modal onClose={() => setOpen(false)} open={open}>
+                    <p className="heading-medium">
+                        Вы успешно приобрели курс! {course?.name}
+                    </p>
+                    <p className="text">Спасибо, что выбираете нас!</p>
+                </Modal>
                 <BackgroundImage third />
                 <div className="container">
                     <div className="page-course__body">
-                        <div className="page-course__card">
-                            <div className="page-course__inner">
-                                <p className="page-course__name heading-medium">
-                                    {course?.name}
-                                </p>
-                                <p className="page-course__description text">
-                                    {course?.about}
-                                </p>
-                                <div className="page-course__info">
-                                    <div className="page-course__attributes">
-                                        <div className="page-course__info--item">
-                                            <CiClock2 color="#558564" size={40} />
-                                            <p>{course?.duration}</p>
-                                        </div>
-                                        <div className="page-course__info--item">
-                                            <BsBookmarkStar color="#558564" size={35} />
-                                            <p>Средний уровень</p>
-                                        </div>
-                                        <div className="page-course__info--item">
-                                            <TbCategory color="#558564" size={35} />
-                                            <p>{course?.category}</p>
-                                        </div>
-                                    </div>
-                                    <div className="page-course__bottom">
-                                        <p className="page-course__price heading-small">
-                                            {course?.price}₽
-                                        </p>
-                                        <button
-                                            type={"button"}
-                                            className="page-course__button button-main"
-                                        >
-                                            Купить
-                                        </button>
-                                    </div>
-                                </div>
-                            </div>
-                            <CoursePageImg
-                                alt={course?.name}
-                                category={course?.category}
-                            />
-                        </div>
-
-                        <p className="page-course__heading heading-small">
-                            Программа курса
-                        </p>
-                        <div className="page-course__program">
-                            {course?.program.map((item, index) => {
-                                return (
-                                    <Accordion key={index} title={item}>
-                                        <p>1. Lorem ipsum dolor sit amet consectetur.</p>
-                                        <p>2. Adipisicing elit. </p>
-                                        <p>3. Fugiat enim doloremque similique.</p>
-                                        <p>4. Natus possimus fuga commodi</p>
-                                        <p>5. Sint itaque voluptate voluptates.</p>
-                                    </Accordion>
-                                );
-                            })}
-                        </div>
-                        <p className="page-course__heading heading-small">
-                            Преподаватель курса
-                        </p>
-                        <div className="page-course__teacher teacher-course">
-                            <div className="teacher-course__body">
-                                <div className="teacher-course__img">
-                                    <Image
-                                        alt={"Преподаватель"}
-                                        imagePath={"/assets/images/teacher/teacher.jpg"}
-                                        sizes={["500"]}
-                                    />
-                                </div>
-                                <div className="teacher-course__info">
-                                    <div className="teacher-course__name heading-medium">
-                                        {teacher?.name}
-                                    </div>
-                                    <div className="teacher-course__occupation heading-small">
-                                        {teacher?.occupation}
-                                    </div>
-                                    <div className="teacher-course__text text">
-                                        {teacher?.text}
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
+                        <CourseCard
+                            course={course}
+                            handleClick={handleClick}
+                            isPurchased={isPurchased}
+                        />
+                        <CourseProgram courseProgram={course?.program} />
+                        <CourseTeacher teacher={teacher} />
                     </div>
                 </div>
             </section>

@@ -348,7 +348,10 @@
     }
 
     // .page-course__inner
-    &__inner {}
+    &__inner {
+        display: flex;
+        flex-direction: column;
+    }
 
     // .page-course__name
     &__name {
@@ -364,6 +367,7 @@
         gap: 30px;
         justify-content: center;
         text-align: center;
+        flex: 1 1 auto;
 
         p {
             font-weight: 400;
@@ -382,6 +386,7 @@
         margin-top: 30px;
         gap: 10px;
         flex-direction: column;
+        height: 100%;
     }
 
     // .page-course__info--item

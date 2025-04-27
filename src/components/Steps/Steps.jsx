@@ -1,7 +1,7 @@
 import React from "react";
 import StepsItem from "./StepsItem";
-import ButtonMain from "../UI/ButtonMain";
 import BackgroundImage from "../UI/BackgroundImage";
+import { Link } from "react-router-dom";
 export default function Steps() {
     const steps = [
         {
@@ -31,7 +31,9 @@ export default function Steps() {
                         );
                     })}
                 </div>
-                <ButtonMain text={"Выбрать курс"} modificator={"steps__button"} />
+                <Link className="button-main steps__button" to={"/courses"}>
+                    Выбрать курс
+                </Link>
             </div>
         </section>
     );

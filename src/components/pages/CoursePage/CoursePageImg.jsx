@@ -20,7 +20,7 @@ export default function CoursePageImg({ category,alt }) {
             />
             <img
                 loading="lazy"
-                src={`/assets/images/coursesCategories/${category}-300.jpg`}
+                src={`/assets/images/coursesCategories/${category}-300.webp`}
                 alt={alt}
             />
         </div>

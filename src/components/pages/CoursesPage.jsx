@@ -46,7 +46,7 @@ export default function CoursesPage() {
                             <option value="all">Все категории</option>
                             {uniqueCategories.map((category) => (
                                 <option key={category} value={category}>
-                                    {category}
+                                    {category.replace(/([а-яё])([А-ЯЁ])/g, "$1 $2")}
                                 </option>
                             ))}
                         </select>

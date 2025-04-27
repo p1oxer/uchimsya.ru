@@ -7,9 +7,12 @@ import "swiper/css/pagination";
 import { FaArrowRightLong } from "react-icons/fa6";
 import HeroItem from "./HeroItem";
 import { useImageLoader } from "../../hooks/useImageLoader";
+import { Link } from "react-router-dom";
+import { useUser } from "../../context/UserContext";
 
 const Hero = () => {
     const imageNames = useImageLoader("hero");
+    const { user } = useUser();
     return (
         <section className="hero">
             <div className="container">
@@ -19,9 +22,12 @@ const Hero = () => {
                         Научитесь новому или углубите свои знания с помощью наших курсов.
                         Мы делаем обучение доступным и увлекательным!
                     </p>
-                    <button type="button" className="body-hero__button button-main">
+                    <Link
+                        to={user ? "/courses" : "/login"}
+                        className="body-hero__button button-main"
+                    >
                         Начать учиться <FaArrowRightLong />
-                    </button>
+                    </Link>
                 </div>
             </div>
             <Swiper

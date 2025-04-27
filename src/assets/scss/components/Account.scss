@@ -3,6 +3,54 @@
     @include adaptiveValue("padding-bottom", 100, 50);
 }
 
+.user-courses {
+    @include adaptiveValue("margin-bottom", 70, 35);
+
+    // .user-courses__title
+    &__title {
+        &::before {
+            content: '';
+            width: 0;
+        }
+    }
+
+    // .user-courses__body
+    &__body {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+        gap: 15px;
+    }
+
+    // .user-courses__item
+    &__item {}
+}
+
+.item-user-courses {
+    max-width: 500px;
+    background-color: #fff;
+    box-shadow: $boxShadow;
+    border-radius: 15px;
+
+    // .item-user-courses__body
+    &__body {
+        padding: 30px;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        height: 100%;
+        gap: 30px;
+    }
+
+    // .item-user-courses__name
+    &__name {
+        flex: 1 1 auto;
+    }
+
+    // .item-user-courses__button
+    &__button {
+    }
+}
+
 
 .admin {
     .heading-small {

@@ -12,7 +12,6 @@ export default function Header({ modificator }) {
         { text: "Контакты", link: "/" },
     ];
     const { user, profile, loading, logout } = useUser();
-    console.log();
     return (
         <>
             <header className={modificator ? `header ${modificator}` : "header"}>

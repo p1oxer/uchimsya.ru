@@ -35,7 +35,7 @@ export default function CoursesCard({ course }) {
                         />
                         <img
                             loading="lazy"
-                            src={`/assets/images/coursesCategories/${course.category}-300.jpg`}
+                            src={`/assets/images/coursesCategories/${course.category}-300.webp`}
                             alt={course.name}
                         />
                     </div>

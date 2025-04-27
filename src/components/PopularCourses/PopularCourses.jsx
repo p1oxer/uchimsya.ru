@@ -1,11 +1,9 @@
 import React from "react";
 import CourseCard from "./CourseCard";
-import ButtonMain from "../UI/ButtonMain";
 import BackgroundImage from "../UI/BackgroundImage";
-import { useImageLoader } from "../../hooks/useImageLoader";
+import { Link } from "react-router-dom";
 
 export default function PopularCourses() {
-    const imagePaths = useImageLoader("popularCourses");
     const popularCourses = [
         {
             img: "python",
@@ -57,20 +55,21 @@ export default function PopularCourses() {
             <div className="container">
                 <div className="popular-courses__title block-title">Популярные курсы</div>
                 <div className="popular-courses__body body-popular-courses">
-                    {popularCourses.map(
-                        (course, index) =>
-                            course.img ? ( // Проверяем, есть ли путь к изображению
-                                <CourseCard
-                                    key={index}
-                                    img={course.img} // Передаем путь к изображению
-                                    title={course.title}
-                                    duration={course.duration}
-                                    description={course.description}
-                                />
-                            ) : null // Если изображения нет, ничего не отображаем
+                    {popularCourses.map((course, index) =>
+                        course.img ? (
+                            <CourseCard
+                                key={index}
+                                img={course.img}
+                                title={course.title}
+                                duration={course.duration}
+                                description={course.description}
+                            />
+                        ) : null
                     )}
                 </div>
-                <ButtonMain text={"Все курсы"} modificator={"popular-courses__button"} />
+                <Link className="button-main popular-courses__button" to={"/courses"}>
+                    Все курсы
+                </Link>
             </div>
         </section>
     );
