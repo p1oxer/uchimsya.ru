@@ -41,6 +41,34 @@ input {
     }
 }
 
+textarea {
+    width: 100%;
+    outline: none;
+    padding: 15px;
+    background-color: #fff;
+    border-radius: 5px;
+    margin-right: 10px;
+    outline: none;
+    border: 1px solid #f7f7f7;
+    transition: all 0.3s ease 0s;
+    height: 200px;
+    resize: vertical;
+
+    @media (any-hover: hover) {
+        &:hover {
+            border: 1px solid #c4c4c4;
+        }
+    }
+
+    &:focus {
+        border: 1px solid $green;
+    }
+
+    @media (max-width:$mobileSmall) {
+        width: 100%;
+    }
+}
+
 select {
     -webkit-appearance: none;
     -moz-appearance: none;
@@ -129,7 +157,17 @@ select {
             transform: scale(0.9);
         }
     }
-
+    &.reversed {
+        background-color: transparent;
+        color: $green;
+        border: 1px solid $green;
+        @media (any-hover: hover){
+            &:hover{
+                background-color: $green;
+                color: #fff;
+            }
+        }
+    }
     &-mini {
         padding: 15px 30px;
         @include adaptiveValue("font-size", 18, 16);

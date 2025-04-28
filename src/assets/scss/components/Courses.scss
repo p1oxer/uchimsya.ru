@@ -499,3 +499,75 @@
 
     &__text {}
 }
+
+
+.page-course {
+
+    // .page-course__heading
+    &__heading {}
+}
+
+.reviews-course {
+
+    // .reviews-course__body
+    &__body {
+        display: flex;
+        flex-direction: column;
+        gap: 30px;
+    }
+
+    // .reviews-course__item
+    &__item {}
+}
+
+.item-reviews-course {
+    padding: 30px;
+    background-color: #ffffff;
+    border-radius: 15px;
+
+    @media (max-width:$mobile) {
+        padding: 15px;
+    }
+
+    // .item-reviews-course__rating
+    &__rating {
+        @include adaptiveValue("margin-bottom", 20, 10);
+    }
+
+    // .item-reviews-course__text
+    &__text {}
+
+    // .item-reviews-course__username
+    &__username {
+        @include adaptiveValue("font-size", 20, 16);
+        margin-top: 10px;
+    }
+
+    // .item-reviews-course__date
+    &__date {
+        margin-top: 5px;
+        font-weight: 400;
+        color: #6e6e6e;
+        line-height: 1.4;
+        font-size: rem(14);
+        margin-bottom: 10px;
+    }
+}
+
+
+.form-reviews-course {
+
+    // .form-reviews-course__rating
+    &__rating {
+        @include adaptiveValue("margin-bottom", 20, 10);
+    }
+
+    &__textarea {
+        @include adaptiveValue("margin-bottom", 20, 10);
+    }
+    &__buttons {
+        display: flex;
+        gap: 20px;
+        flex-wrap: wrap;
+    }
+}

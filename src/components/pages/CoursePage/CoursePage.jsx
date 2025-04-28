@@ -8,13 +8,14 @@ import Modal from "../../UI/Modal";
 import CourseTeacher from "./CourseTeacher";
 import CourseProgram from "./CourseProgram";
 import CourseCard from "./CourseCard";
+import CoursePageReviews from "./CoursePageReviews";
 export default function CoursePage() {
     const { user } = useUser();
     const { courseName } = useParams();
     const [course, setCourse] = useState(null);
     const [teacher, setTeacher] = useState(null);
     const [loading, setLoading] = useState(true);
-    const [isPurchased, setIsPurchased] = useState(false); // Новое состояние
+    const [isPurchased, setIsPurchased] = useState(false); 
     const navigate = useNavigate();
     const [open, setOpen] = useState(false);
 
@@ -124,6 +125,7 @@ export default function CoursePage() {
                         />
                         <CourseProgram courseProgram={course?.program} />
                         <CourseTeacher teacher={teacher} />
+                        <CoursePageReviews courseId={course?.id} user={user} isPurchased={isPurchased}/>
                     </div>
                 </div>
             </section>
