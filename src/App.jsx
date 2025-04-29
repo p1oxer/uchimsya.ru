@@ -11,6 +11,8 @@ import { AuthContextProvider } from "./context/AuthContext.jsx";
 import AccountPage from "./components/pages/AccountPage/AccountPage.jsx";
 import PrivateRoute from "./components/PrivateRoute.jsx";
 import { UserProvider } from "./context/UserContext.jsx";
+import Policy from "./components/pages/Policy.jsx";
+import ScrollToTop from "./components/UI/ScrollToTop.jsx";
 const router = createBrowserRouter([
     {
         path: "/",
@@ -45,6 +47,10 @@ const router = createBrowserRouter([
                 path: "/register",
                 element: <RegisterPage />,
             },
+            {
+                path: "/privacy-policy",
+                element: <Policy />,
+            },
         ],
     },
 ]);
@@ -53,6 +59,7 @@ export default function App() {
         <>
             <AuthContextProvider>
                 <UserProvider>
+                    
                     <RouterProvider router={router} />
                 </UserProvider>
             </AuthContextProvider>

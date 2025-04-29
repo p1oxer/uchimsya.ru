@@ -13,7 +13,6 @@ export default function Home() {
     return (
         <>
             <div className="wrapper">
-                <ScrollRestoration />
                 <Header />
                 <main>
                     <Hero />

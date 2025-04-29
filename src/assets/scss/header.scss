@@ -80,7 +80,9 @@
 	align-items: center;
 	padding: 30px 0;
 	@include adaptiveValue("font-size", 16, 14, 1920, 767);
-
+	@media (max-width:$mobileSmall){
+		 padding: 15px 0; 
+	}
 	@media (min-width:$mobile) {
 		justify-content: space-between;
 	}

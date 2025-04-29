@@ -3,9 +3,7 @@ import React from "react";
 export default function FooterNav() {
     const navigation = [
         { text: "Наши курсы", link: "/courses" },
-        { text: "О нас", link: "/" },
-        { text: "Контакты", link: "/" },
-        { text: "Политика конфиденциальности", link: "/" },
+        { text: "Политика конфиденциальности", link: "/privacy-policy" },
     ];
     return (
         <nav className="body-footer__nav">

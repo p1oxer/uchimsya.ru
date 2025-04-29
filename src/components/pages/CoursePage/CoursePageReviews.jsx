@@ -13,14 +13,17 @@ export default function CoursePageReviews({ courseId, user, isPurchased }) {
     const [reviewText, setReviewText] = useState("");
     const [existingReview, setExistingReview] = useState(null); // Для хранения существующего отзыва
     useEffect(() => {
-        // Загрузка существующего отзыва при монтировании компонента
-        if (user && isPurchased) {
+        if (user?.id && courseId && isPurchased) {
             fetchExistingReview();
         }
-    }, [user, isPurchased]);
+    }, [user?.id, courseId, isPurchased]);
     useEffect(() => {
+        if (!courseId) return;
         async function fetchReviews() {
-            const { data, error } = await supabase.from("reviews").select("*");
+            const { data, error } = await supabase
+                .from("reviews")
+                .select("*")
+                .eq("course_id", courseId);
 
             if (error) {
                 console.error("Ошибка при загрузке отзывов: ", error);
@@ -29,20 +32,21 @@ export default function CoursePageReviews({ courseId, user, isPurchased }) {
             }
         }
         fetchReviews();
-    }, []);
+    }, [courseId]);
     async function fetchExistingReview() {
+        if (!user?.id || !courseId) return;
+
         try {
             const { data, error } = await supabase
                 .from("reviews")
                 .select("*")
                 .eq("user_id", user.id)
                 .eq("course_id", courseId)
-                .single(); // Ожидаем только один отзыв для данного пользователя и курса
+                .maybeSingle();
 
             if (error) {
                 console.error("Ошибка при загрузке отзыва: ", error);
             } else if (data) {
-                // Если отзыв существует, обновляем состояние
                 setExistingReview(data);
                 setRating(data.rating);
                 setReviewText(data.text);
@@ -52,19 +56,32 @@ export default function CoursePageReviews({ courseId, user, isPurchased }) {
         }
     }
     async function deleteReview(e) {
-        if (!existingReview) return;
         e.preventDefault();
-        const { error } = await supabase
-            .from("reviews")
-            .delete()
-            .eq("id", existingReview.id);
-        if (error) {
-            console.error("Ошибка при удалении отзыва: ", error);
-            return;
+
+        if (!existingReview) return;
+
+        try {
+            const { error } = await supabase
+                .from("reviews")
+                .delete()
+                .eq("id", existingReview.id);
+
+            if (error) {
+                console.error("Ошибка при удалении отзыва: ", error);
+                return;
+            }
+
+            setReviews((prevReviews) =>
+                prevReviews.filter((review) => review.id !== existingReview.id)
+            );
+
+            setExistingReview(null);
+            setRating(5);
+            setReviewText("");
+            setOpen(true);
+        } catch (err) {
+            console.error("Ошибка при удалении отзыва: ", err);
         }
-        setExistingReview(null);
-        setRating(5);
-        setReviewText("");
     }
     async function handleSubmit(e) {
         e.preventDefault();
@@ -73,33 +90,57 @@ export default function CoursePageReviews({ courseId, user, isPurchased }) {
             let response;
 
             if (existingReview) {
-                // Обновление существующего отзыва
+                // Обновление отзыва
                 response = await supabase
                     .from("reviews")
                     .update({
                         text: reviewText,
                         rating: rating,
                     })
-                    .eq("id", existingReview.id); // Используем ID существующего отзыва
+                    .eq("id", existingReview.id)
+                    .select(); // чтобы получить обновлённые данные
+
+                if (response.error) {
+                    console.error("Ошибка при обновлении отзыва: ", response.error);
+                    return { success: false, error: response.error };
+                }
+
+                // Обновляем отзыв в списке
+                setReviews((prevReviews) =>
+                    prevReviews.map((review) =>
+                        review.id === existingReview.id ? response.data[0] : review
+                    )
+                );
+
+                setExistingReview(response.data[0]);
+                setReviewText(response.data[0].text);
             } else {
-                // Создание нового отзыва
-                response = await supabase.from("reviews").insert([
-                    {
-                        text: reviewText,
-                        rating: rating,
-                        course_id: courseId,
-                        user_id: user.id,
-                    },
-                ]);
+                // Добавление нового отзыва
+                response = await supabase
+                    .from("reviews")
+                    .insert([
+                        {
+                            text: reviewText,
+                            rating: rating,
+                            course_id: courseId,
+                            user_id: user.id,
+                        },
+                    ])
+                    .select(); // чтобы получить вставленный отзыв
+
+                if (response.error) {
+                    console.error("Ошибка при создании отзыва: ", response.error);
+                    return { success: false, error: response.error };
+                }
+
+                // Добавляем новый отзыв в список
+                setReviews((prevReviews) => [...prevReviews, response.data[0]]);
+                setExistingReview(response.data[0]);
+                setReviewText(response.data[0].text);
             }
 
-            if (response.error) {
-                console.error("Ошибка при отправке отзыва: ", response.error);
-                return { success: false, error: response.error };
-            }
-
+            // Очистка формы и открытие модального окна "спасибо"
             setRating(5);
-            setReviewText("");
             setOpenThankyou(true);
         } catch (error) {
             console.error("Ошибка при отправке отзыва: ", error);
@@ -181,15 +222,15 @@ export default function CoursePageReviews({ courseId, user, isPurchased }) {
             ) : null}
 
             <p className="page-course__heading heading-small">Отзывы</p>
-            <div className="reviews-course__body">
-                {
-					reviews?.map((item,index) => {
-						return (
-							<CoursePageReviewsItem key={index} review={item} />
-						)
-					})
-				}
-            </div>
+            {reviews?.length > 0 ? (
+                <div className="reviews-course__body">
+                    {reviews?.map((item, index) => {
+                        return <CoursePageReviewsItem key={index} review={item} />;
+                    })}
+                </div>
+            ) : (
+                <p className="text">Отзывов на курс пока нет.</p>
+            )}
         </section>
     );
 }

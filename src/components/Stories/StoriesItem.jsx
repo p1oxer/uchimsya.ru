@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { BsArrowRight } from "react-icons/bs";
 import { IoIosInformationCircleOutline } from "react-icons/io";
 import StoriesImg from "./StoriesImg";
+import { Link } from "react-router-dom";
 
 export default function StoriesItem({ item }) {
     const [modalVisible, setModalVisible] = useState(false);
@@ -29,7 +30,8 @@ export default function StoriesItem({ item }) {
                 >
                     <div className="modal-story__body">
                         <div className="modal-story__top">
-                            {item.name}, курс: <a href="#">{item.courseName}</a>
+                            {item.name}, курс:{" "}
+                            <Link to={item.link}>{item.courseName}</Link>
                         </div>
                         <div className="modal-story__text">{item.story}</div>
                     </div>
@@ -43,7 +45,7 @@ export default function StoriesItem({ item }) {
                         <span className="heading-small">{item.newProfession}</span>
                     </div>
                     <div className="body-story__details">
-                        {item.name}, курс: <a href="#">{item.courseName}</a>
+                        {item.name}, курс: <Link to={item.link}>{item.courseName}</Link>
                     </div>
                 </div>
             </div>

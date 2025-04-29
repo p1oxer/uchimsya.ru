@@ -7,7 +7,10 @@ export default function Burger() {
         setIsOpened(!isOpened);
         document.body.classList.toggle("menu-open");
     }
-    const navigation = [{ text: "Главная", link: "/" }];
+    const navigation = [
+        { text: "Главная", link: "/" },
+        { text: "Все курсы", link: "/courses" },
+    ];
     return (
         <div className={isOpened ? "header__menu menu" : "header__menu menu"}>
             <button onClick={handleClick} type="button" className="menu__icon icon-menu">

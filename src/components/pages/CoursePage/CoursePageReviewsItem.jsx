@@ -7,7 +7,6 @@ export default function CoursePageReviewsItem({ review }) {
 
     useEffect(() => {
         async function fetchUserName() {
-            console.log("User  ID from review:", review.user_id); 
             try {
                 const { data, error } = await supabase
                     .from("profiles")
@@ -18,7 +17,6 @@ export default function CoursePageReviewsItem({ review }) {
                 if (error) {
                     console.error("Ошибка при загрузке имени пользователя: ", error);
                 } else {
-                    console.log("Fetched user data:", data); 
                     setUser (data.fullname || "Аноним"); 
                 }
             } catch (err) {
@@ -38,10 +36,10 @@ export default function CoursePageReviewsItem({ review }) {
             </div>
             <p className="item-reviews-course__text text">{review.text}</p>
             <p className="item-reviews-course__username heading-small">
-                {user || "Аноним"} 
+                {user || "Аноним"}
             </p>
             <p className="item-reviews-course__date">
-                {new Date(review.created_at).toLocaleString("ru-RU")}
+                {new Date(review.created_at).toLocaleDateString("ru-RU")}
             </p>
         </div>
     );

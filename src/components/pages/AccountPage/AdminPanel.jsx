@@ -46,7 +46,7 @@ export default function AdminPanel() {
 
             {!loading && (
                 <>
-                    <p className="admin__title block-title">Админ-панель</p>
+                    <p className="admin__title block-title">Заявки</p>
                     <p className="heading-small">Заявки на обратный звонок</p>
                     <table className="admin__table">
                         <thead>

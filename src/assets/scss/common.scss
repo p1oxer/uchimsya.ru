@@ -515,3 +515,21 @@ select {
         transform: rotate(1turn)
     }
 }
+
+.policy-page {
+    @include adaptiveValue("padding-top", 100, 50);
+    @include adaptiveValue("padding-bottom", 100, 50);
+    h5 {
+        @include adaptiveValue("font-size", 24, 18);
+            font-weight: bold;
+            font-family: Raleway;
+            line-height: 1.2;
+            @include adaptiveValue("margin-bottom", 30, 15);
+    }
+    p {
+        @include adaptiveValue("font-size", 16, 14);
+            line-height: 1.4;
+            color: #1b1b1b;
+            @include adaptiveValue("margin-bottom", 20, 10);
+    }
+}

@@ -8,8 +8,6 @@ export default function Header({ modificator }) {
     const { session } = UserAuth();
     const navigation = [
         { text: "Наши курсы", link: "/courses" },
-        { text: "О нас", link: "/" },
-        { text: "Контакты", link: "/" },
     ];
     const { user, profile, loading, logout } = useUser();
     return (
