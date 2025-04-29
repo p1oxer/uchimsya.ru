@@ -2,9 +2,7 @@ body {
     background-color: #f7f7f7;
 }
 
-.error {
-    color: red;
-}
+
 
 input {
     padding: 15px;
@@ -532,4 +530,6 @@ select {
             color: #1b1b1b;
             @include adaptiveValue("margin-bottom", 20, 10);
     }
+}.error {
+    color: red;
 }

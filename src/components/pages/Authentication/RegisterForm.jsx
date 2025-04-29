@@ -13,7 +13,9 @@ export default function RegisterForm() {
 
     const { session, registerNewUser } = UserAuth();
     const navigate = useNavigate();
-
+    const validatePassword = (password) => {
+        return password.length >= 6; // Минимальная длина пароля - 6 символов
+    };
     // Функция для проверки полноты номера телефона
     const checkPhoneCompleteness = (phone) => {
         if (phone) {
@@ -28,25 +30,48 @@ export default function RegisterForm() {
     }, [phone]);
 
     // Регистрация
-    async function handleRegister(e) {
-        e.preventDefault();
-        setLoading(true);
-        try {
-            if (!isPhoneComplete) {
-                alert("Пожалуйста, введите полный номер телефона.");
-                return;
-            }
-            const result = await registerNewUser(email, password, fullname, phone);
-            if (result.success) {
-                navigate("/account");
-            }
-        } catch (error) {
-            setError("Произошла ошибка", error);
-            console.log(error);
-        } finally {
-            setLoading(false);
-        }
-    }
+   async function handleRegister(e) {
+       e.preventDefault();
+       setError(""); // сброс ошибки
+
+       if (!validatePassword(password)) {
+           setError("Пароль должен содержать минимум 6 символов");
+           return;
+       }
+
+       if (!isPhoneComplete) {
+           setError("Пожалуйста, введите полный номер телефона.");
+           return;
+       }
+
+       setLoading(true);
+
+       try {
+           const result = await registerNewUser(email, password, fullname, phone);
+
+           if (result.success) {
+               navigate("/account");
+           } else {
+               // Проверяем тип ошибки
+               const supaError = result.error;
+               if (
+                   supaError?.message === "User already registered" ||
+                   supaError?.status === 422
+               ) {
+                   setError("Пользователь с таким email уже зарегистрирован");
+               } else if (supaError?.message) {
+                   setError("Ошибка при регистрации: " + supaError.message);
+               } else {
+                   setError("Произошла неизвестная ошибка при регистрации");
+               }
+           }
+       } catch (error) {
+           setError("Произошла ошибка: " + (error.message || error));
+           console.log(error);
+       } finally {
+           setLoading(false);
+       }
+   }
     return (
         <form onSubmit={handleRegister}>
             <label htmlFor="phone">Номер телефона</label>

@@ -14,11 +14,10 @@ export const AuthContextProvider = ({ children }) => {
 
         if (error) {
             console.error("Произошла ошибка при регистрации: ", error);
-            return { success: false, error };
+            return { success: false, error }; 
         }
 
-        // Добавление данных в таблицу profiles
-        const { user } = data;
+        const user = data.user;
         if (user) {
             const { error: profileError } = await supabase
                 .from("profiles")
@@ -28,7 +27,6 @@ export const AuthContextProvider = ({ children }) => {
                 console.error("Ошибка при добавлении профиля: ", profileError);
                 return { success: false, error: profileError };
             }
-
             // Проверка, что запись создана
             const { error: fetchError } = await supabase
                 .from("profiles")
@@ -44,7 +42,6 @@ export const AuthContextProvider = ({ children }) => {
 
         return { success: true, data };
     };
-
     // login function
     const loginUser = async (email, password) => {
         try {
@@ -54,18 +51,32 @@ export const AuthContextProvider = ({ children }) => {
             });
 
             if (error) {
-                console.error("Произошла ошибка при авторизации: ", error);
+                // Обработка специфических ошибок
+                let errorMessage = "Произошла ошибка при входе";
+                if (error.status === 400) {
+                    errorMessage = "Неверный пароль или почта";
+                } else if (error.status === 404) {
+                    errorMessage = "Пользователь с такой почтой не найден";
+                } else {
+                    console.error("Ошибка при авторизации: ", error);
+                }
+
                 return {
                     success: false,
-                    error: error.message,
+                    error: errorMessage,
                 };
             }
+
             return {
                 success: true,
                 data,
             };
         } catch (error) {
             console.error("Произошла ошибка: ", error);
+            return {
+                success: false,
+                error: "Неизвестная ошибка",
+            };
         }
     };
 

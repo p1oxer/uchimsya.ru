@@ -71,7 +71,9 @@ export default function AccountPage() {
                         </div>
                     ) : (
                         <>
-                            <p className="heading-small">У вас пока нет курсов.</p>
+                            <p className="heading-small" style={{ marginBottom: 20 }}>
+                                У вас пока нет курсов.
+                            </p>
                             <Link
                                 className="button-main button-main-mini"
                                 to={"/courses"}

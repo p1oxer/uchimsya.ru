@@ -10,22 +10,28 @@ export default function LoginForm() {
 
     const { session, loginUser } = UserAuth();
     const navigate = useNavigate();
-
+    
     async function handleLogin(e) {
         e.preventDefault();
         setLoading(true);
+        
         try {
             const result = await loginUser(email, password);
-            if (result.success) {
-                navigate("/account");
+
+            if (!result.success) {
+                setError(result.error);
+                return;
             }
+
+            navigate("/account");
         } catch (error) {
-            setError("Произошла ошибка", error);
-            console.log(error);
+            setError("Произошла неизвестная ошибка");
+            console.error(error);
         } finally {
             setLoading(false);
         }
     }
+
     return (
         <form onSubmit={handleLogin}>
             <label htmlFor="email">Электронная почта*</label>

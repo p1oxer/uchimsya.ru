@@ -3,21 +3,24 @@ import { FaStar } from "react-icons/fa";
 import { supabase } from "../../../supaBaseClient";
 
 export default function CoursePageReviewsItem({ review }) {
-    const [user, setUser] = useState(""); 
+    const [user, setUser] = useState("");
+
+    const [firstName, lastName] = user.split(" "); // Берем первые два слова
+    const displayName = `${firstName} ${lastName}`; // Собираем имя и фамилию
 
     useEffect(() => {
         async function fetchUserName() {
             try {
                 const { data, error } = await supabase
                     .from("profiles")
-                    .select("fullname") 
-                    .eq("id", review.user_id) 
+                    .select("fullname")
+                    .eq("id", review.user_id)
                     .single();
 
                 if (error) {
                     console.error("Ошибка при загрузке имени пользователя: ", error);
                 } else {
-                    setUser (data.fullname || "Аноним"); 
+                    setUser(data.fullname || "Аноним");
                 }
             } catch (err) {
                 console.error("Ошибка при загрузке имени пользователя: ", err);
@@ -25,7 +28,7 @@ export default function CoursePageReviewsItem({ review }) {
         }
 
         fetchUserName();
-    }, [review]); 
+    }, [review]);
 
     return (
         <div className="reviews-course__item item-reviews-course">
@@ -36,7 +39,7 @@ export default function CoursePageReviewsItem({ review }) {
             </div>
             <p className="item-reviews-course__text text">{review.text}</p>
             <p className="item-reviews-course__username heading-small">
-                {user || "Аноним"}
+                {displayName || "Аноним"}
             </p>
             <p className="item-reviews-course__date">
                 {new Date(review.created_at).toLocaleDateString("ru-RU")}

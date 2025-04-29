@@ -9,34 +9,40 @@ export const UserProvider = ({ children }) => {
     const [profile, setProfile] = useState(null);
     const [loading, setLoading] = useState(true);
 
-    const fetchUserAndProfile = async () => {
-        setLoading(true);
+   const fetchUserAndProfile = async () => {
+       setLoading(true);
 
-        const { data: authData, error: authError } = await supabase.auth.getUser();
-        if (authError || !authData?.user) {
-            setUser(null);
-            setProfile(null);
-            setLoading(false);
-            return;
-        }
+       try {
+           // Получение текущего пользователя из Supabase Auth
+           const { data: authData, error: authError } = await supabase.auth.getUser();
+           if (authError || !authData?.user) {
+               setUser(null);
+               setProfile(null);
+               setLoading(false);
+               return;
+           }
 
-        setUser(authData.user);
+           setUser(authData.user);
 
-        const { data: profileData, error: profileError } = await supabase
-            .from("profiles")
-            .select("*")
-            .eq("id", authData.user.id)
-            .single();
+           // Получение профиля пользователя из таблицы profiles
+           const { data: profileData, error: profileError } = await supabase
+               .from("profiles")
+               .select("*")
+               .eq("id", authData.user.id)
+               .maybeSingle(); // Используем maybeSingle вместо single
 
-        if (profileError) {
-            console.error("Ошибка загрузки профиля:", profileError);
-            setProfile(null);
-        } else {
-            setProfile(profileData);
-        }
-
-        setLoading(false);
-    };
+           if (profileError) {
+               console.error("Ошибка загрузки профиля:", profileError);
+               setProfile(null);
+           } else {
+               setProfile(profileData); // profileData будет null, если профиль не найден
+           }
+       } catch (error) {
+           console.error("Произошла ошибка при загрузке данных пользователя:", error);
+       } finally {
+           setLoading(false);
+       }
+   };
 
     const logout = async () => {
         await supabase.auth.signOut();
